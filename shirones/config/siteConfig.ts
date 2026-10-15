@@ -1,4 +1,4 @@
-import settings from "../../content/site.json";
+import {settings} from "../../src/data/site-settings";
 import type { SiteConfig } from "@/types/config";
 import type {
 	ResolvedTextureOptions,

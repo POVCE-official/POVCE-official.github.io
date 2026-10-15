@@ -1,6 +1,6 @@
 ---
 import FooterBar from "@components/atoms/blog/FooterBar.astro";
-import settings from "../../../content/site.json";
+import {settings} from "../../data/site-settings";
 import { profileConfig } from "@/config/profileConfig";
 ---
 <FooterBar name={profileConfig.name} year={new Date().getFullYear()}

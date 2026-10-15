@@ -1,4 +1,4 @@
-import settings from "../../content/site.json";
+import {settings} from "./site-settings";
 import { validateEntry } from "../../scripts/content-validation.mjs";
 export {settings};
 export type CollectionKind = "music" | "movies" | "games";

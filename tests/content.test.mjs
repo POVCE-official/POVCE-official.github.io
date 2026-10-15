@@ -22,11 +22,17 @@ test('site configuration accepts defaults and rejects broken required fields or 
   assert.doesNotThrow(()=>validateSite(settings));
   for(const change of [{title:''},{themeHue:361},{themeHue:'315'},{avatar:''},{githubUrl:'https://example.com'}]) assert.throws(()=>validateSite({...settings,...change}));
 });
-test('CMS covers exactly the editable site keys and separates four collections',()=>{
+test('CMS covers saved settings and requires only mandatory fields',()=>{
   const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
   const settings=JSON.parse(fs.readFileSync(new URL('../content/site.json',import.meta.url),'utf8'));
   assert.deepEqual(config.content.filter(entry=>entry.type==='collection').map(entry=>entry.name),['music','movies','games','works']);
-  assert.deepEqual(config.content.find(entry=>entry.name==='site').fields.map(field=>field.name).sort(),Object.keys(settings).sort());
+  const fields=config.content.find(entry=>entry.name==='site').fields;
+  const editable=new Set(fields.map(field=>field.name));
+  for(const key of Object.keys(settings)) assert.ok(editable.has(key),`No editor field for ${key}`);
+  for(const field of fields.filter(field=>field.required)) assert.ok(Object.hasOwn(settings,field.name),`Missing required field ${field.name}`);
+  const withoutOptional={...settings};
+  for(const field of fields.filter(field=>!field.required)) delete withoutOptional[field.name];
+  assert.doesNotThrow(()=>validateSite(withoutOptional));
   assert.equal(config.media.input,'public/uploads');assert.equal(config.media.output,'/uploads');
 });
 test('CMS optional link validation accepts blank values but rejects unsafe schemes',()=>{
