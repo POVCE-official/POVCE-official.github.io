@@ -1,59 +1,49 @@
-# POVCE 收藏室
+# POVCE 收藏室与在线后台
 
-基于 [Shirone](https://github.com/LyraVoid/Shirone)、[shirones](https://github.com/yCENzh/shirones) 和 Astro 构建的个人收藏站。
+网站：https://povce-official.github.io/
 
-线上地址：https://povce-official.github.io/
+管理入口：https://povce-official.github.io/admin/
 
-主要入口：音乐 `/music/`、影视 `/movies/`、游戏 `/games/`。设计作品 `/works/` 只放在页脚与关于页。没有文章随笔分区。
+前台使用 Shirone + Astro 和 GitHub Pages，在线编辑使用 Pages CMS：https://pagescms.org/
 
-## 添加收藏
+## 首次开通
 
-编辑 `src/data/collections.ts` 的 `collections` 数组。第一版没有演示收藏，请填写自己的真实条目。数组末尾的新条目会出现在首页「最近收录」。
+1. 在管理入口打开 Pages CMS，使用 GitHub 登录并确认服务条款。
+2. 安装 Pages CMS GitHub App 时选择 Only select repositories，仅勾选 POVCE-official.github.io。
+3. 打开该仓库的 main 分支。后台读取 .pages.yml，显示音乐、影视、游戏、设计作品、站点与个人资料五个栏目。
 
-```ts
-{
-  id: "unique-id",
-  kind: "music", // music / movies / games
-  title: "作品名称",
-  creator: "创作者",
-  year: "发行年份",
-  status: "常听", // 音乐：常听/在听/想听；影视：已看/在看/想看；游戏：在玩/已通关/想玩/搁置
-  note: "自己的收藏笔记",
-  tags: ["标签"],
-  cover: "/covers/example.webp", // 可选，文件放 public/covers/
-  url: "https://example.com/", // 可选，作品的官方页面
-}
-```
+管理服务的授权需要账号所有者完成；部署网站和后台配置不会自动授予服务仓库权限。
 
-音乐先使用作品链接；有合法可用音源时再配置播放器。设计作品填写同一文件的 `works` 数组。
+## 日常管理
 
-## 修改外观
+- 新建收藏：进入对应栏目新建，填写名称、状态、收录日期、笔记和标签，上传或选择封面，再保存。
+- 编号自动生成，无需修改。日期默认当前日期，首页优先显示最近收录的内容。
+- 查找修改：在对应栏目搜索或按日期排序，打开条目后编辑并保存。
+- 暂不展示：打开此开关后，该条目不会显示在网站上。仓库公开，原文件仍能被读取，勿保存私密内容。
+- 删除收藏：删除对应条目；不要删除仍被其他收藏引用的图片。
+- 修改资料：在「站点与个人资料」中编辑站名、简介、头像、主题色相、横幅和关于页。横幅留空时使用主题默认图片。
+- 设计作品：独立管理，前台入口继续放在页脚和关于页。
 
-- `shirones/config/siteConfig.ts`：站名、主题颜色、横幅、语言。
-- `shirones/config/profileConfig.ts`：个人介绍、头像、GitHub 链接。
-- `shirones/config/navBarConfig.ts`：顶部导航。
-- `src/styles/archive.css`：收藏页样式，沿用 Shirone 设计令牌。
-- `src/components/organisms/`：少量官方覆盖入口，隐藏文章分类栏并精简页脚。
+每次保存会提交到 GitHub 并触发自动发布，通常需要几分钟。等待发布成功再刷新网站。发布失败时上一版本继续显示，错误文件和字段会写入发布日志。
+
+发布进度：https://github.com/POVCE-official/POVCE-official.github.io/actions
+
+## 数据位置
+
+- content/site.json：站点与个人资料。
+- content/music/*.json：音乐，每个文件一条。
+- content/movies/*.json：影视，每个文件一条。
+- content/games/*.json：游戏，每个文件一条。
+- content/works/*.json：设计作品，每个文件一条。
+- public/uploads/：后台上传的图片。
+- .pages.yml：后台表单和媒体配置。
+
+src/data/collections.ts 负责装载数据，日常管理不需要修改它。收藏状态按栏目固定；作品链接只接受 http/https。封面接受站内图片路径或 http/https 图片链接。上传目录只接受图片。
+
+scripts/content-validation.mjs 校验数据，脚本在检查与发布前运行。.pages.yml 采用合法 YAML 1.2 的 JSON 写法。
 
 ## 本地开发
 
-Node.js 24，pnpm 11.25.0。
+使用 Node.js 24 和 pnpm 11.25.0，依次执行 pnpm install --frozen-lockfile、pnpm dev。修改代码后执行 pnpm test、pnpm check、pnpm build。Windows 可使用 pnpm.cmd。不要修改 node_modules 中的主题文件。
 
-```sh
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
-pnpm check
-pnpm build
-pnpm preview
-```
-
-Windows PowerShell 可使用 `pnpm.cmd`。
-
-## 自动部署
-
-GitHub Settings → Pages → Source 设为 **GitHub Actions**。
-
-推送到 `main` 会运行 `.github/workflows/deploy.yml`：安装锁定依赖、检查页面、构建并发布 `dist/`。不需要添加个人访问令牌。
-
-2022 年旧站目录及旧静态资源已从当前版本移除，没有另建旧资料备份目录。Git 提交历史仍保留正常的版本记录。
+2022 年旧站文件已从当前版本移除，没有另建资料备份目录；Git 历史仍保留正常版本记录。

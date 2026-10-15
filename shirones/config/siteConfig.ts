@@ -1,3 +1,4 @@
+import settings from "../../content/site.json";
 import type { SiteConfig } from "@/types/config";
 import type {
 	ResolvedTextureOptions,
@@ -12,8 +13,8 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
 export const siteConfig: SiteConfig = withUserConfig("site", {
 	site: "https://povce-official.github.io/",
 	base: "/",
-	title: "POVCE",
-	subtitle: "音乐、影视与游戏的私人收藏室",
+	title: settings.title,
+	subtitle: settings.subtitle,
 	// 电脑端顶栏标题与导航内容区域："left" 左对齐，"center" 居中。
 	topAppBar: {
 		contentAlign: "center",
@@ -31,7 +32,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	// IANA time zone for precise post and moment timestamps. It is independent of lang.
 	timeZone: "Asia/Shanghai",
 	themeColor: {
-		hue: 315, // Default hue 0-360. 站点设计默认粉紫（偏二次元）；262 紫 / 345 粉 也可选
+		hue: settings.themeHue, // Default hue 0-360. 站点设计默认粉紫（偏二次元）；262 紫 / 345 粉 也可选
 		fixed: false, // Hide the theme color picker for visitors
 		// Dynamic Material 3 palette style (TonalSpot/Vibrant/Content/Expressive/Rainbow/FruitSalad/Monochrome/Neutral/Fidelity)
 		style: "tonalSpot",
@@ -57,8 +58,8 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		// desktop 用于 >= 1024px；mobile 仅用于 < 1024px 的首页，手机非首页不显示壁纸。
 		// 数组顺序就是轮播顺序；只需要静态 Banner 时，每组保留一张图片即可。
 		src: {
-			desktop: ["assets/images/banner/desktop/1.webp"],
-			mobile: ["assets/images/banner/mobile/1.webp"],
+			desktop: [settings.bannerDesktop || "assets/images/banner/desktop/1.webp"],
+			mobile: [settings.bannerMobile || "assets/images/banner/mobile/1.webp"],
 		},
 		// 图片裁切焦点："top"、"center" 或 "bottom"。
 		position: "center",
@@ -70,8 +71,8 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 		homeText: {
 			// 仅在首页 Banner 中显示，标题与副标题会上下居中排列。
 			enable: true,
-			title: "POVCE",
-			subtitle: ["把喜欢的声音、故事和世界，慢慢收进这里。"],
+			title: settings.bannerTitle,
+			subtitle: [settings.bannerSubtitle],
 			typewriter: {
 				// 副标题逐字显示；关闭后直接显示完整副标题。
 				enable: true,

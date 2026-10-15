@@ -1,0 +1,557 @@
+{
+  "media": {
+    "input": "public/uploads",
+    "output": "/uploads",
+    "extensions": [
+      "jpg",
+      "jpeg",
+      "png",
+      "webp",
+      "avif",
+      "gif"
+    ],
+    "rename": "safe"
+  },
+  "content": [
+    {
+      "name": "music",
+      "label": "音乐收藏",
+      "type": "collection",
+      "path": "content/music",
+      "format": "json",
+      "filename": "{fields.id}.json",
+      "subfolders": false,
+      "exclude": [
+        ".gitkeep"
+      ],
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "creator",
+          "status",
+          "date",
+          "draft"
+        ],
+        "sort": [
+          "date",
+          "title"
+        ],
+        "search": [
+          "title",
+          "creator",
+          "note",
+          "tags"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "label": "编号",
+          "type": "uuid",
+          "required": true,
+          "options": {
+            "editable": false
+          }
+        },
+        {
+          "name": "title",
+          "label": "作品名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "creator",
+          "label": "歌手 / 音乐人",
+          "type": "string"
+        },
+        {
+          "name": "year",
+          "label": "发行年份",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "label": "收藏状态",
+          "type": "select",
+          "required": true,
+          "default": "常听",
+          "options": {
+            "values": [
+              "常听",
+              "在听",
+              "想听"
+            ]
+          }
+        },
+        {
+          "name": "date",
+          "label": "收录日期",
+          "type": "date",
+          "required": true,
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        },
+        {
+          "name": "cover",
+          "label": "封面",
+          "type": "image"
+        },
+        {
+          "name": "note",
+          "label": "收藏笔记",
+          "type": "text"
+        },
+        {
+          "name": "tags",
+          "label": "标签",
+          "type": "string",
+          "list": true
+        },
+        {
+          "name": "url",
+          "label": "作品官方链接",
+          "type": "string",
+          "pattern": "^https?://.+",
+          "description": "可选，以 https:// 或 http:// 开头。"
+        },
+        {
+          "name": "draft",
+          "label": "暂不展示",
+          "type": "boolean",
+          "default": false,
+          "description": "开启后不显示在网站中；此仓库公开，勿保存私密信息。"
+        }
+      ]
+    },
+    {
+      "name": "movies",
+      "label": "影视收藏",
+      "type": "collection",
+      "path": "content/movies",
+      "format": "json",
+      "filename": "{fields.id}.json",
+      "subfolders": false,
+      "exclude": [
+        ".gitkeep"
+      ],
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "creator",
+          "status",
+          "date",
+          "draft"
+        ],
+        "sort": [
+          "date",
+          "title"
+        ],
+        "search": [
+          "title",
+          "creator",
+          "note",
+          "tags"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "label": "编号",
+          "type": "uuid",
+          "required": true,
+          "options": {
+            "editable": false
+          }
+        },
+        {
+          "name": "title",
+          "label": "作品名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "creator",
+          "label": "导演 / 主创",
+          "type": "string"
+        },
+        {
+          "name": "year",
+          "label": "发行年份",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "label": "收藏状态",
+          "type": "select",
+          "required": true,
+          "default": "已看",
+          "options": {
+            "values": [
+              "已看",
+              "在看",
+              "想看"
+            ]
+          }
+        },
+        {
+          "name": "date",
+          "label": "收录日期",
+          "type": "date",
+          "required": true,
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        },
+        {
+          "name": "cover",
+          "label": "封面",
+          "type": "image"
+        },
+        {
+          "name": "note",
+          "label": "收藏笔记",
+          "type": "text"
+        },
+        {
+          "name": "tags",
+          "label": "标签",
+          "type": "string",
+          "list": true
+        },
+        {
+          "name": "url",
+          "label": "作品官方链接",
+          "type": "string",
+          "pattern": "^https?://.+",
+          "description": "可选，以 https:// 或 http:// 开头。"
+        },
+        {
+          "name": "draft",
+          "label": "暂不展示",
+          "type": "boolean",
+          "default": false,
+          "description": "开启后不显示在网站中；此仓库公开，勿保存私密信息。"
+        }
+      ]
+    },
+    {
+      "name": "games",
+      "label": "游戏收藏",
+      "type": "collection",
+      "path": "content/games",
+      "format": "json",
+      "filename": "{fields.id}.json",
+      "subfolders": false,
+      "exclude": [
+        ".gitkeep"
+      ],
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "creator",
+          "status",
+          "date",
+          "draft"
+        ],
+        "sort": [
+          "date",
+          "title"
+        ],
+        "search": [
+          "title",
+          "creator",
+          "note",
+          "tags"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "label": "编号",
+          "type": "uuid",
+          "required": true,
+          "options": {
+            "editable": false
+          }
+        },
+        {
+          "name": "title",
+          "label": "作品名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "creator",
+          "label": "开发商",
+          "type": "string"
+        },
+        {
+          "name": "year",
+          "label": "发行年份",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "label": "收藏状态",
+          "type": "select",
+          "required": true,
+          "default": "在玩",
+          "options": {
+            "values": [
+              "在玩",
+              "已通关",
+              "想玩",
+              "搁置"
+            ]
+          }
+        },
+        {
+          "name": "date",
+          "label": "收录日期",
+          "type": "date",
+          "required": true,
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        },
+        {
+          "name": "cover",
+          "label": "封面",
+          "type": "image"
+        },
+        {
+          "name": "note",
+          "label": "收藏笔记",
+          "type": "text"
+        },
+        {
+          "name": "tags",
+          "label": "标签",
+          "type": "string",
+          "list": true
+        },
+        {
+          "name": "url",
+          "label": "作品官方链接",
+          "type": "string",
+          "pattern": "^https?://.+",
+          "description": "可选，以 https:// 或 http:// 开头。"
+        },
+        {
+          "name": "draft",
+          "label": "暂不展示",
+          "type": "boolean",
+          "default": false,
+          "description": "开启后不显示在网站中；此仓库公开，勿保存私密信息。"
+        }
+      ]
+    },
+    {
+      "name": "works",
+      "label": "设计作品",
+      "type": "collection",
+      "path": "content/works",
+      "format": "json",
+      "filename": "{fields.id}.json",
+      "subfolders": false,
+      "exclude": [
+        ".gitkeep"
+      ],
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "date",
+          "draft"
+        ],
+        "sort": [
+          "date",
+          "title"
+        ],
+        "search": [
+          "title",
+          "description"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "label": "编号",
+          "type": "uuid",
+          "required": true,
+          "options": {
+            "editable": false
+          }
+        },
+        {
+          "name": "title",
+          "label": "作品名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "label": "作品简介",
+          "type": "text"
+        },
+        {
+          "name": "date",
+          "label": "收录日期",
+          "type": "date",
+          "required": true,
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        },
+        {
+          "name": "cover",
+          "label": "封面",
+          "type": "image"
+        },
+        {
+          "name": "url",
+          "label": "作品官方链接",
+          "type": "string",
+          "pattern": "^https?://.+",
+          "description": "可选，以 https:// 或 http:// 开头。"
+        },
+        {
+          "name": "draft",
+          "label": "暂不展示",
+          "type": "boolean",
+          "default": false,
+          "description": "开启后不显示在网站中；此仓库公开，勿保存私密信息。"
+        }
+      ]
+    },
+    {
+      "name": "site",
+      "label": "站点与个人资料",
+      "type": "file",
+      "path": "content/site.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "title",
+          "label": "网站名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "subtitle",
+          "label": "网站简介",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "bannerTitle",
+          "label": "横幅标题",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "bannerSubtitle",
+          "label": "横幅文字",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "bannerDesktop",
+          "label": "桌面横幅",
+          "type": "image",
+          "description": "留空使用 Shirone 默认横幅。"
+        },
+        {
+          "name": "bannerMobile",
+          "label": "手机横幅",
+          "type": "image",
+          "description": "留空使用 Shirone 默认横幅。"
+        },
+        {
+          "name": "themeHue",
+          "label": "主题色相",
+          "type": "number",
+          "required": true,
+          "options": {
+            "min": 0,
+            "max": 360
+          }
+        },
+        {
+          "name": "name",
+          "label": "显示名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "avatar",
+          "label": "头像",
+          "type": "image",
+          "required": true
+        },
+        {
+          "name": "bio",
+          "label": "个人简介",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "githubUrl",
+          "label": "GitHub 主页",
+          "type": "string",
+          "required": true,
+          "pattern": "^https://github\\.com/.+"
+        },
+        {
+          "name": "homeTitle",
+          "label": "首页标题",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "homeDescription",
+          "label": "首页说明",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "aboutTitle",
+          "label": "关于页标题",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "aboutText",
+          "label": "关于页正文",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "aboutMore",
+          "label": "关于页补充",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
