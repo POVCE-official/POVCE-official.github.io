@@ -117,7 +117,7 @@
           "name": "url",
           "label": "作品官方链接",
           "type": "string",
-          "pattern": "^https?://.+",
+          "pattern": "^(https?://.+)?$",
           "description": "可选，以 https:// 或 http:// 开头。"
         },
         {
@@ -233,7 +233,7 @@
           "name": "url",
           "label": "作品官方链接",
           "type": "string",
-          "pattern": "^https?://.+",
+          "pattern": "^(https?://.+)?$",
           "description": "可选，以 https:// 或 http:// 开头。"
         },
         {
@@ -350,7 +350,7 @@
           "name": "url",
           "label": "作品官方链接",
           "type": "string",
-          "pattern": "^https?://.+",
+          "pattern": "^(https?://.+)?$",
           "description": "可选，以 https:// 或 http:// 开头。"
         },
         {
@@ -432,7 +432,7 @@
           "name": "url",
           "label": "作品官方链接",
           "type": "string",
-          "pattern": "^https?://.+",
+          "pattern": "^(https?://.+)?$",
           "description": "可选，以 https:// 或 http:// 开头。"
         },
         {

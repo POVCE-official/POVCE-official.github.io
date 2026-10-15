@@ -29,3 +29,12 @@ test('CMS covers exactly the editable site keys and separates four collections',
   assert.deepEqual(config.content.find(entry=>entry.name==='site').fields.map(field=>field.name).sort(),Object.keys(settings).sort());
   assert.equal(config.media.input,'public/uploads');assert.equal(config.media.output,'/uploads');
 });
+test('CMS optional link validation accepts blank values but rejects unsafe schemes',()=>{
+  const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
+  for(const entry of config.content.filter(entry=>entry.type==='collection')){
+    const pattern=new RegExp(entry.fields.find(field=>field.name==='url').pattern);
+    assert.ok(pattern.test(''));
+    assert.ok(pattern.test('https://example.com/'));
+    assert.ok(!pattern.test('javascript:alert(1)'));
+  }
+});
