@@ -1,0 +1,6 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import {copy} from "../data/collections";
+import "../styles/archive.css";
+---
+<MainGridLayout title={copy.notFoundTitle} page="notFound"><section class="archive-panel empty-state"><p class="archive-eyebrow">404</p><h1>{copy.notFound}</h1><a class="quiet-link" href="/">{copy.home}</a></section></MainGridLayout>
