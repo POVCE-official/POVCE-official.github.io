@@ -1,11 +1,18 @@
 ---
 import {copy} from "../data/collections";
+import {Icon} from "astro-icon/components";
 import type {CollectionEntry} from "../data/collections";
 interface Props {items: CollectionEntry[];}
 const {items}=Astro.props;
 ---
-<div class="collection-grid">{items.map(item => <article class="entry" data-entry data-status={item.status} data-search={[item.title,item.creator,...(item.tags??[])].join(" ").toLowerCase()}>
+<div class="collection-grid" data-kind={items[0]?.kind}>{items.map(item => <article class="entry" data-entry data-status={item.status} data-search={[item.title,item.creator,...(item.tags??[])].join(" ").toLowerCase()}>
+ {item.kind==="movies" ? <div class="movie-poster-card">
+ {item.cover && <img class="movie-poster" src={item.cover} alt="" loading="lazy" width="400" height="600"/>}
+ <div class="movie-topline"><small>{item.status}{item.year && " · " + item.year}</small>{item.url && <a class="movie-official" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.title+" · 官方详情页"} title="查看详情"><Icon name="material-symbols:open-in-new-rounded"/></a>}</div>
+ <div class="movie-caption"><h2 title={item.title}>{item.title}</h2>{item.creator && <p class="movie-creator" title={item.creator}>{item.creator}</p>}<time datetime={item.date}>{item.date.replaceAll("-",".")}</time>{item.note && <details class="movie-notes"><summary>收藏笔记</summary><p>{item.note}</p></details>}</div>
+ </div> : <>
  {item.cover && <img src={item.cover} alt={item.title} loading="lazy" width="640" height="480"/>}
  <small>{item.status}{item.year && " · " + item.year}</small><h2>{item.title}</h2>{item.creator && <p>{item.creator}</p>}<p>{item.note}</p><time class="entry-date" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>
  {item.url && <a class="quiet-link" href={item.url} target="_blank" rel="noopener noreferrer">{copy.link}</a>}
+ </>}
 </article>)}</div>
