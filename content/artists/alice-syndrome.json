@@ -1,19 +1,16 @@
 {
-  "id": "alice-syndrome",
+  "id": "a18919db-b8cb-48e3-8b0e-0211ed7ccd0c",
   "title": "Alice Syndrome",
   "artistType": "Band",
-  "note": "四人乐队 Alice Syndrome（앨리스신드롬）。成员为主唱 TAIRA、贝斯手 SEBEEN、鼓手 JEONGMIN 和吉他手 AWON；首张数字单曲《Deep Dive》于 2026 年 7 月 25 日发行。",
+  "date": "2026-09-16",
+  "cover": "/uploads/artists/alice-syndrome-avatar.webp",
+  "note": "앨리스신드롬  成员为主唱 TAIRA、贝斯手 SEBEEN 鼓手 JEONGMIN 和吉他手 AWON",
   "tags": [
     "Rock",
     "Band",
     "Alice Syndrome"
   ],
-  "url": "https://www.instagram.com/alice__syndrome/",
-  "date": "2026-09-16",
-  "cover": "/uploads/artists/alice-syndrome-avatar.webp",
   "photos": [
-    "/uploads/artists/alice-syndrome-01.webp",
-    "/uploads/artists/alice-syndrome-02.webp",
     "/uploads/artists/alice-syndrome-03.webp",
     "/uploads/artists/alice-syndrome-04.webp",
     "/uploads/artists/alice-syndrome-05.webp",
@@ -21,6 +18,8 @@
     "/uploads/artists/alice-syndrome-07.webp",
     "/uploads/artists/alice-syndrome-08.webp",
     "/uploads/artists/alice-syndrome-09.webp",
+    "/uploads/artists/alice-syndrome-02.webp",
+    "/uploads/artists/alice-syndrome-01.webp",
     "/uploads/artists/alice-syndrome-10.webp",
     "/uploads/artists/alice-syndrome-11.webp",
     "/uploads/artists/alice-syndrome-12.webp",
@@ -33,5 +32,6 @@
     "/uploads/artists/alice-syndrome-19.webp",
     "/uploads/artists/alice-syndrome-20.webp"
   ],
+  "url": "https://www.instagram.com/alice__syndrome/",
   "draft": false
 }
