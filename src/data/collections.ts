@@ -12,7 +12,7 @@ export const collections: CollectionEntry[] = Object.entries(files).map(([file,v
  const kind=file.split("/").at(-2) as CollectionKind;
  validateEntry(value,kind,file);
  return {...value,kind} as unknown as CollectionEntry;
-}).filter(entry=>!entry.draft).sort((a,b)=>(a.date??"").localeCompare(b.date??"")||a.id.localeCompare(b.id));
+}).filter(entry=>!entry.draft).sort((a,b)=>(b.date??"").localeCompare(a.date??"")||a.id.localeCompare(b.id));
 export const shelves = [
  {kind:"music" as const, title:"音乐", english:"SOUND ROOM", icon:"material-symbols:headphones-rounded", description:"一首歌、一张专辑，和反复按下播放的瞬间。", empty:"还没有收录音乐", hint:"等下一首舍不得切掉的歌，成为这里的第一条收藏。", statuses:["常听","在听","想听"]},
  {kind:"movies" as const, title:"影视", english:"SCREEN ROOM", icon:"material-symbols:movie-outline-rounded", description:"电影、剧集与动画，留住值得回看的故事。", empty:"还没有收录影视", hint:"电影散场之后，想留住的那些片段会放在这里。", statuses:["已看","在看","想看"]},

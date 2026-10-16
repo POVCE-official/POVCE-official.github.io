@@ -9,5 +9,5 @@ import "../styles/archive.css";
  <section class="archive-panel"><p class="archive-eyebrow">{copy.label}</p><h1>{copy.title}</h1><p class="archive-prose">{copy.description}</p></section>
  <div class="shelf-grid">{shelves.map(shelf=><a class="shelf-card" href={"/"+shelf.kind+"/"}>
  <span class="shelf-icon"><Icon name={shelf.icon} aria-hidden="true"/></span><small>{shelf.english}</small><h2>{shelf.title}</h2><p>{shelf.description}</p><footer><span>{collections.filter(e=>e.kind===shelf.kind).length} {copy.unit}</span><span aria-hidden="true">↗</span></footer></a>)}</div>
- <section class="archive-panel"><h2>{copy.latest}</h2>{collections.length ? <CollectionCards items={collections.slice().reverse().slice(0,6)}/> : <p class="archive-prose">{copy.latestHint}</p>}</section>
+ <section class="archive-panel"><h2>{copy.latest}</h2>{collections.length ? <CollectionCards items={collections.slice(0,6)}/> : <p class="archive-prose">{copy.latestHint}</p>}</section>
 </MainGridLayout>
