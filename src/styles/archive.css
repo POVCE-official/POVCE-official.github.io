@@ -1,4 +1,5 @@
 html:root{--banner-stage-height:clamp(15rem,30vh,20rem);--banner-panel-overlap:1.25rem}
+body:has(#swup-container[data-current-page="about"]) .banner-stage__copy--context{display:none!important}
 .banner-stage__copy h1{font-size:clamp(2rem,4vw,3.25rem)!important}.banner-stage__copy p{font-size:1rem!important}
 .archive-panel{padding:clamp(1.25rem,3vw,2.25rem);background:var(--card-bg);border-radius:var(--shape-corner-l);color:var(--on-surface);margin-bottom:1rem}
 .archive-eyebrow{font-size:.7rem;letter-spacing:.17em;color:var(--primary);font-weight:600;margin:0 0 .75rem}

@@ -6,3 +6,5 @@ import { profileConfig } from "@/config/profileConfig";
 <FooterBar name={profileConfig.name} year={new Date().getFullYear()}
  links={[{label:"设计作品",href:"/works/"},{label:"GitHub",href:settings.githubUrl,external:true},{label:"Sitemap",href:"/sitemap-index.xml",external:true},{label:"网站管理",href:"/admin/",external:true}]}
  poweredBy={[{label:"Astro",href:"https://astro.build",external:true},{label:"Shirone",href:"https://github.com/LyraVoid/Shirone",external:true}]} />
+
+<script>import "../../scripts/collection-filters";</script>

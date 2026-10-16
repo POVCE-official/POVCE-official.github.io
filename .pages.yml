@@ -29,7 +29,6 @@
         "fields": [
           "title",
           "creator",
-          "status",
           "date",
           "draft"
         ],
@@ -73,20 +72,6 @@
           "name": "year",
           "label": "发行年份",
           "type": "string"
-        },
-        {
-          "name": "status",
-          "label": "收藏状态",
-          "type": "select",
-          "required": true,
-          "default": "常听",
-          "options": {
-            "values": [
-              "常听",
-              "在听",
-              "想听"
-            ]
-          }
         },
         {
           "name": "date",

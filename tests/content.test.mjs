@@ -5,6 +5,11 @@ import {validateEntry,validateSite,validateUrl} from '../scripts/content-validat
 import {newestFirst} from '../scripts/collection-order.mjs';
 
 const valid={id:'test-item',title:'验证条目',date:'2026-10-16',status:'常听'};
+test('Songs can be saved without a listening status after removing the classification',()=>{
+  for(const status of [undefined,null,'']) assert.doesNotThrow(()=>validateEntry({...valid,status},'music','fixture'));
+  const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
+  assert.ok(!config.content.find(item=>item.name==='music').fields.some(field=>field.name==='status'));
+});
 test('accepts CMS entries with empty optional fields and true/false visibility',()=>{
   assert.doesNotThrow(()=>validateEntry({...valid,cover:null,url:'',note:null,tags:[],draft:true},'music','fixture'));
 });
