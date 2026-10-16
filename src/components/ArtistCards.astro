@@ -10,6 +10,13 @@ const {items}=Astro.props;
  <div class="artist-info"><h2>{artist.title}</h2><span class="artist-type">{artist.artistType??"Solo"}</span>{artist.note && <p>{artist.note}</p>}{artist.tags?.length && <p class="song-tags">{artist.tags.map(tag=><span>#{tag}</span>)}</p>}</div>
  {artist.url && <a class="official-link" href={artist.url} target="_blank" rel="noopener noreferrer">Official site <Icon name="material-symbols:arrow-outward-rounded"/></a>}
  </header>
- {artist.photos?.length ? <section class="artist-gallery" aria-label={artist.title + " · 照片墙"}><h3>Photo wall <span>{artist.photos.length} photos</span></h3><div class="photo-wall">{artist.photos.map((photo,index)=><a href={photo} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={artist.title + " · 查看照片 " + (index+1)}><img src={photo} alt={artist.title + " · 收藏照片 " + (index+1)} loading="lazy" width="480" height="360"/></a>)}</div></section> : <p class="gallery-empty">照片墙等待下一份收藏。</p>}
+ {artist.photos?.length ? <section class="artist-gallery" aria-label={artist.title + " · 照片墙"}>
+  <h3>Photo wall <span>{artist.photos.length} photos</span></h3>
+  <div class="photo-wall">{artist.photos.slice(0,6).map((photo,index)=><a href={photo} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={artist.title + " · 查看照片 " + (index+1)}><img src={photo} alt={artist.title + " · 收藏照片 " + (index+1)} loading="lazy" width="480" height="360"/></a>)}</div>
+  {artist.photos.length>6 && <details class="gallery-more">
+   <summary><span class="gallery-expand">展开其余 {artist.photos.length-6} 张照片</span><span class="gallery-collapse">收起照片</span><Icon name="material-symbols:expand-more-rounded"/></summary>
+   <div class="photo-wall">{artist.photos.slice(6).map((photo,index)=><a href={photo} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={artist.title + " · 查看照片 " + (index+7)}><img src={photo} alt={artist.title + " · 收藏照片 " + (index+7)} loading="lazy" width="480" height="360"/></a>)}</div>
+  </details>}
+ </section> : <p class="gallery-empty">照片墙等待下一份收藏。</p>}
  <footer class="artist-footer"><time datetime={artist.date}>收录于 {artist.date.replaceAll("-",".")}</time></footer>
  </article>)}</div>
