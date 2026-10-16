@@ -1,16 +1,15 @@
 {
-  "id": "tairamissu",
+  "id": "d79c1550-fed4-4082-9388-8eed0c846a58",
   "title": "TAIRA (tairamissu)",
   "artistType": "Solo",
-  "note": "Alice Syndrome（앨리스신드롬）主唱，个人 Instagram 为 @tairamissu。照片墙收录她在个人账号发布的写真、演出幕后与日常记录。",
+  "date": "2026-09-16",
+  "cover": "/uploads/artists/tairamissu-avatar.webp",
+  "note": "Alice Syndrome（앨리스신드롬）主唱",
   "tags": [
     "Vocalist",
     "Alice Syndrome",
     "TAIRA"
   ],
-  "url": "https://www.instagram.com/tairamissu/",
-  "date": "2026-09-16",
-  "cover": "/uploads/artists/tairamissu-avatar.webp",
   "photos": [
     "/uploads/artists/tairamissu-01.webp",
     "/uploads/artists/tairamissu-02.webp",
@@ -33,5 +32,6 @@
     "/uploads/artists/tairamissu-19.webp",
     "/uploads/artists/tairamissu-20.webp"
   ],
+  "url": "https://www.instagram.com/tairamissu/",
   "draft": false
 }
