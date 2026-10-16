@@ -10,14 +10,16 @@
 
 1. 在管理入口打开 Pages CMS，使用 GitHub 登录并确认服务条款。
 2. 安装 Pages CMS GitHub App 时选择 Only select repositories，仅勾选 POVCE-official.github.io。
-3. 打开该仓库的 main 分支。后台读取 .pages.yml，显示音乐、影视、游戏、设计作品、站点与个人资料五个栏目。
+3. 打开该仓库的 main 分支。后台读取 .pages.yml，显示 Songs、Artists、Movie、Series、Game、设计作品、站点与个人资料七个栏目。
 
 管理服务的授权需要账号所有者完成；部署网站和后台配置不会自动授予服务仓库权限。
 
 ## 日常管理
 
 - 新建收藏：进入对应栏目新建，填写名称、状态、收录日期、笔记和标签，上传或选择封面，再保存。
-- 编号自动生成，无需修改。日期默认当前日期，首页优先显示最近收录的内容。
+- 编号自动生成，无需修改。填写收录日期，首页与各分区都按该日期由新到旧展示。
+- Artists：新建艺人或团队，选择 Solo / Band；头像与照片墙独立管理。「艺人照片墙」支持多张图片，在同一张艺人信息卡片内展示，点击照片可看原图。「官方详情页网址」可填写自定义 http(s) 链接，留空隐藏入口。
+- Movie 用于电影，Series 用于剧集与番剧；原有影视内容仍保留在 Movie，原有音乐保留在 Songs。
 - 查找修改：在对应栏目搜索或按日期排序，打开条目后编辑并保存。
 - 暂不展示：打开此开关后，该条目不会显示在网站上。仓库公开，原文件仍能被读取，勿保存私密内容。
 - 删除收藏：删除对应条目；不要删除仍被其他收藏引用的图片。
@@ -31,8 +33,10 @@
 ## 数据位置
 
 - content/site.json：站点与个人资料。
-- content/music/*.json：音乐，每个文件一条。
-- content/movies/*.json：影视，每个文件一条。
+- content/music/*.json：Songs 歌曲，每个文件一条；前台 /music/ 使用线性列表。
+- content/artists/*.json：Artists 艺人 / 团队；前台 /music/artists/。
+- content/movies/*.json：Movie 电影；前台 /media/，旧 /movies/ 入口自动跳转。
+- content/series/*.json：Series 剧集与番剧；前台 /media/series/。
 - content/games/*.json：游戏，每个文件一条。
 - content/works/*.json：设计作品，每个文件一条。
 - public/uploads/：后台上传的图片。

@@ -1,0 +1,13 @@
+---
+import {Icon} from "astro-icon/components";
+import {sectionConfig} from "../data/collections";
+import type {CollectionEntry} from "../data/collections";
+interface Props {items: CollectionEntry[]; recent?: boolean;}
+const {items,recent=false}=Astro.props;
+---
+<div class="song-list">{items.map(item=><article class="song-row" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase()}>
+ {item.cover ? <img class="song-cover" src={item.cover} alt="" loading="lazy" width="80" height="80"/> : <span class="song-cover song-placeholder"><Icon name={sectionConfig[item.kind].icon}/></span>}
+ <div class="song-info"><h2>{item.title}</h2><p>{item.creator}{recent && <span class="entry-section">{item.creator ? " · " : ""}{sectionConfig[item.kind].title}{sectionConfig[item.kind].sub && " / " + sectionConfig[item.kind].sub}</span>}</p>{!recent && item.note && <p class="song-note">{item.note}</p>}{!recent && item.tags?.length && <p class="song-tags">{item.tags.map(tag=><span>#{tag}</span>)}</p>}</div>
+ {item.status && <span class="entry-status">{item.status}</span>}<time datetime={item.date}>{item.date.replaceAll("-",".")}</time>
+ {recent ? <a class="row-link" href={sectionConfig[item.kind].href} aria-label={"查看 " + sectionConfig[item.kind].sub + " " + item.title}><Icon name="material-symbols:arrow-forward-rounded"/></a> : item.url && <a class="row-link" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.title + " · 官方详情页"}><Icon name="material-symbols:open-in-new-rounded"/></a>}
+ </article>)}</div>

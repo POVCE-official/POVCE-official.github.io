@@ -1,6 +1,7 @@
 export const statuses = {
   music: ['常听', '在听', '想听'],
   movies: ['已看', '在看', '想看'],
+  series: ['已看', '在看', '想看'],
   games: ['在玩', '已通关', '想玩', '搁置'],
 };
 
@@ -28,7 +29,7 @@ export function validateUrl(value, source, local = false, required = false) {
 
 export function validateEntry(value, kind, source) {
   object(value, source);
-  if (!(kind in statuses) && kind !== 'works') fail(source, '未知的收藏类型');
+  if (!(kind in statuses) && !['works', 'artists'].includes(kind)) fail(source, '未知的收藏类型');
   text(value.id, `${source}.id`, true);
   if (!/^[a-zA-Z0-9_-]+$/.test(value.id)) fail(source, '编号只能包含字母、数字、短横线和下划线');
   text(value.title, `${source}.title`, true);
@@ -36,7 +37,12 @@ export function validateEntry(value, kind, source) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value.date) || !Number.isFinite(Date.parse(value.date)) || new Date(value.date).toISOString().slice(0, 10) !== value.date) fail(source, '收录日期须为有效的 YYYY-MM-DD 日期');
   if (value.draft !== undefined && typeof value.draft !== 'boolean') fail(source, '暂不展示必须是开关值');
   for (const key of ['creator', 'year', 'note', 'description']) text(value[key], `${source}.${key}`);
-  if (kind !== 'works' && !statuses[kind].includes(value.status)) fail(source, '收藏状态与分类不匹配');
+  if (kind in statuses && !statuses[kind].includes(value.status)) fail(source, '收藏状态与分类不匹配');
+  if (kind === 'artists') {
+    if (value.artistType != null && !['Solo', 'Band'].includes(value.artistType)) fail(source, '艺人类型须为 Solo 或 Band');
+    if (value.photos != null && !Array.isArray(value.photos)) fail(source, '照片墙必须为图片列表');
+    for (const photo of value.photos ?? []) validateUrl(photo, `${source}.photos`, true, true);
+  }
   if (value.tags != null && (!Array.isArray(value.tags) || value.tags.some(tag => typeof tag !== 'string'))) fail(source, '标签必须为文字列表');
   validateUrl(value.url, `${source}.url`);
   validateUrl(value.cover, `${source}.cover`, true);

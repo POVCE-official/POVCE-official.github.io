@@ -6,6 +6,6 @@ const {items}=Astro.props;
 ---
 <div class="collection-grid">{items.map(item => <article class="entry" data-entry data-status={item.status} data-search={[item.title,item.creator,...(item.tags??[])].join(" ").toLowerCase()}>
  {item.cover && <img src={item.cover} alt={item.title} loading="lazy" width="640" height="480"/>}
- <small>{item.status}{item.year && " · " + item.year}</small><h2>{item.title}</h2>{item.creator && <p>{item.creator}</p>}<p>{item.note}</p>
+ <small>{item.status}{item.year && " · " + item.year}</small><h2>{item.title}</h2>{item.creator && <p>{item.creator}</p>}<p>{item.note}</p><time class="entry-date" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>
  {item.url && <a class="quiet-link" href={item.url} target="_blank" rel="noopener noreferrer">{copy.link}</a>}
 </article>)}</div>

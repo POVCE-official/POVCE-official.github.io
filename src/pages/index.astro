@@ -2,12 +2,12 @@
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import {Icon} from "astro-icon/components";
 import {collections,shelves,copy} from "../data/collections";
-import CollectionCards from "../components/CollectionCards.astro";
+import CollectionRows from "../components/CollectionRows.astro";
 import "../styles/archive.css";
 ---
 <MainGridLayout page="home" description={copy.description}>
- <section class="archive-panel"><p class="archive-eyebrow">{copy.label}</p><h1>{copy.title}</h1><p class="archive-prose">{copy.description}</p></section>
- <div class="shelf-grid">{shelves.map(shelf=><a class="shelf-card" href={"/"+shelf.kind+"/"}>
- <span class="shelf-icon"><Icon name={shelf.icon} aria-hidden="true"/></span><small>{shelf.english}</small><h2>{shelf.title}</h2><p>{shelf.description}</p><footer><span>{collections.filter(e=>e.kind===shelf.kind).length} {copy.unit}</span><span aria-hidden="true">↗</span></footer></a>)}</div>
- <section class="archive-panel"><h2>{copy.latest}</h2>{collections.length ? <CollectionCards items={collections.slice(0,6)}/> : <p class="archive-prose">{copy.latestHint}</p>}</section>
+ <section class="archive-panel home-intro"><p class="archive-eyebrow">{copy.label}</p><h1>{copy.title}</h1><p class="archive-prose">{copy.description}</p></section>
+ <div class="shelf-grid">{shelves.map(shelf=>{const entries=collections.filter(entry=>shelf.kinds.includes(entry.kind));const cover=entries.find(entry=>entry.cover)?.cover;return <a class="shelf-card" href={shelf.href}>
+ <div class="shelf-art">{cover?<img src={cover} alt="" loading="lazy" width="480" height="240"/>:<Icon name={shelf.icon}/>}</div><div class="shelf-card-body"><small>{shelf.english}</small><h2>{shelf.title}</h2><p>{shelf.description}</p><footer><span>{entries.length} {copy.unit}</span><span aria-hidden="true">↗</span></footer></div></a>})}</div>
+ <section class="archive-panel"><div class="section-heading"><h2>{copy.latest}</h2><span class="sort-caption">收录日期 · 新到旧</span></div>{collections.length ? <CollectionRows items={collections.slice(0,6)} recent/> : <p class="archive-prose">{copy.latestHint}</p>}</section>
 </MainGridLayout>

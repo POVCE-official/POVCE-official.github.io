@@ -15,7 +15,7 @@
   "content": [
     {
       "name": "music",
-      "label": "音乐收藏",
+      "label": "Music · Songs 歌曲",
       "type": "collection",
       "path": "content/music",
       "format": "json",
@@ -130,8 +130,120 @@
       ]
     },
     {
+      "name": "artists",
+      "label": "Music · Artists 艺人 / 团队",
+      "type": "collection",
+      "path": "content/artists",
+      "format": "json",
+      "filename": "{fields.id}.json",
+      "subfolders": false,
+      "exclude": [
+        ".gitkeep"
+      ],
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "artistType",
+          "date",
+          "draft"
+        ],
+        "sort": [
+          "date",
+          "title"
+        ],
+        "search": [
+          "title",
+          "note",
+          "tags"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "label": "编号",
+          "type": "uuid",
+          "required": true,
+          "options": {
+            "editable": false
+          }
+        },
+        {
+          "name": "title",
+          "label": "艺人 / 团队名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "artistType",
+          "label": "艺人类型",
+          "type": "select",
+          "default": "Solo",
+          "options": {
+            "values": [
+              "Solo",
+              "Band"
+            ]
+          }
+        },
+        {
+          "name": "date",
+          "label": "收录日期",
+          "type": "date",
+          "required": true,
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        },
+        {
+          "name": "cover",
+          "label": "艺人头像",
+          "type": "image"
+        },
+        {
+          "name": "note",
+          "label": "艺人简介 / 收藏笔记",
+          "type": "text"
+        },
+        {
+          "name": "tags",
+          "label": "标签",
+          "type": "string",
+          "list": true
+        },
+        {
+          "name": "photos",
+          "label": "艺人照片墙",
+          "type": "image",
+          "options": {
+            "multiple": true,
+            "unique": true
+          },
+          "description": "可上传或选择多张图片；按这里的图片顺序展示在该艺人的信息卡片内。"
+        },
+        {
+          "name": "url",
+          "label": "官方详情页网址",
+          "type": "string",
+          "pattern": "^(https?://.+)?$",
+          "description": "自定义官方站点或艺人详情页链接，以 https:// 或 http:// 开头；留空则隐藏入口。"
+        },
+        {
+          "name": "draft",
+          "label": "暂不展示",
+          "type": "boolean",
+          "default": false,
+          "description": "开启后不显示在网站中；此仓库公开，勿保存私密信息。"
+        }
+      ]
+    },
+    {
       "name": "movies",
-      "label": "影视收藏",
+      "label": "Media · Movie 电影",
       "type": "collection",
       "path": "content/movies",
       "format": "json",
@@ -246,8 +358,124 @@
       ]
     },
     {
+      "name": "series",
+      "label": "Media · Series 剧集 / 番剧",
+      "type": "collection",
+      "path": "content/series",
+      "format": "json",
+      "filename": "{fields.id}.json",
+      "subfolders": false,
+      "exclude": [
+        ".gitkeep"
+      ],
+      "view": {
+        "primary": "title",
+        "fields": [
+          "title",
+          "creator",
+          "status",
+          "date",
+          "draft"
+        ],
+        "sort": [
+          "date",
+          "title"
+        ],
+        "search": [
+          "title",
+          "creator",
+          "note",
+          "tags"
+        ],
+        "default": {
+          "sort": "date",
+          "order": "desc"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "label": "编号",
+          "type": "uuid",
+          "required": true,
+          "options": {
+            "editable": false
+          }
+        },
+        {
+          "name": "title",
+          "label": "剧集 / 番剧名称",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "creator",
+          "label": "导演 / 主创",
+          "type": "string"
+        },
+        {
+          "name": "year",
+          "label": "发行年份",
+          "type": "string"
+        },
+        {
+          "name": "status",
+          "label": "收藏状态",
+          "type": "select",
+          "required": true,
+          "default": "已看",
+          "options": {
+            "values": [
+              "已看",
+              "在看",
+              "想看"
+            ]
+          }
+        },
+        {
+          "name": "date",
+          "label": "收录日期",
+          "type": "date",
+          "required": true,
+          "options": {
+            "format": "yyyy-MM-dd"
+          }
+        },
+        {
+          "name": "cover",
+          "label": "封面",
+          "type": "image"
+        },
+        {
+          "name": "note",
+          "label": "收藏笔记",
+          "type": "text"
+        },
+        {
+          "name": "tags",
+          "label": "标签",
+          "type": "string",
+          "list": true
+        },
+        {
+          "name": "url",
+          "label": "作品官方链接",
+          "type": "string",
+          "pattern": "^(https?://.+)?$",
+          "description": "可选，以 https:// 或 http:// 开头。"
+        },
+        {
+          "name": "draft",
+          "label": "暂不展示",
+          "type": "boolean",
+          "default": false,
+          "description": "开启后不显示在网站中；此仓库公开，勿保存私密信息。"
+        }
+      ]
+    },
+    {
       "name": "games",
-      "label": "游戏收藏",
+      "label": "Game 游戏",
       "type": "collection",
       "path": "content/games",
       "format": "json",

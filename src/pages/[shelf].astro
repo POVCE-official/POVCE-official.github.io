@@ -1,29 +1,6 @@
 ---
-import MainGridLayout from "@layouts/MainGridLayout.astro";
-import {Icon} from "astro-icon/components";
-import CollectionCards from "../components/CollectionCards.astro";
-import {collections,shelves,copy} from "../data/collections";
-import "../styles/archive.css";
-export function getStaticPaths(){return shelves.map(shelf=>({params:{shelf:shelf.kind},props:{shelf}}));}
-const {shelf}=Astro.props;
-const items=collections.filter(item=>item.kind===shelf.kind);
+import CollectionView from "../components/CollectionView.astro";
+export function getStaticPaths(){return [{params:{shelf:"games"}},{params:{shelf:"movies"}}];}
+if(Astro.params.shelf==="movies") return Astro.redirect("/media/",301);
 ---
-<MainGridLayout title={shelf.title} description={shelf.description} page={shelf.kind==="games"?"games":"anime"}>
- <section class="archive-panel" data-collection>
- <p class="archive-eyebrow">{shelf.english}</p><h1>{shelf.title}</h1><p class="archive-prose">{shelf.description}</p>
- {items.length ? <><div class="collection-controls"><input type="search" aria-label={copy.search} placeholder={copy.search} data-collection-search/><button type="button" class="filter-chip" data-filter="" aria-pressed="true">{copy.all}</button>{shelf.statuses.map(status=><button type="button" class="filter-chip" data-filter={status} aria-pressed="false">{status}</button>)}</div><CollectionCards items={items}/><p data-no-results hidden role="status">{copy.noResults}</p></> : <div class="empty-state"><span class="shelf-icon"><Icon name={shelf.icon} aria-hidden="true"/></span><h2>{shelf.empty}</h2><p>{shelf.hint}</p></div>}
- <div class="quiet-links"><a class="quiet-link" href="/">{copy.home}</a></div>
- </section>
-</MainGridLayout>
-<script>
- function filterShelf(root: Element){
-  const query=(root.querySelector<HTMLInputElement>('[data-collection-search]')?.value??'').toLowerCase().trim();
-  const status=root.querySelector<HTMLElement>('[data-filter][aria-pressed="true"]')?.dataset.filter??'';
-  let visible=0;
-  root.querySelectorAll<HTMLElement>('[data-entry]').forEach(card=>{card.hidden=Boolean((status&&card.dataset.status!==status)||(query&&!card.dataset.search?.includes(query)));if(!card.hidden)visible++;});
-  const empty=root.querySelector<HTMLElement>('[data-no-results]');if(empty)empty.hidden=visible>0;
- }
- // Delegation survives Shirone's Swup content replacement without adding listeners per visit.
- document.addEventListener('input',event=>{const input=event.target;if(input instanceof HTMLInputElement&&input.matches('[data-collection-search]')){const root=input.closest('[data-collection]');if(root)filterShelf(root);}});
- document.addEventListener('click',event=>{const target=event.target;if(!(target instanceof Element))return;const button=target.closest<HTMLElement>('[data-filter]');const root=button?.closest('[data-collection]');if(!button||!root)return;root.querySelectorAll('[data-filter]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));filterShelf(root);});
-</script>
+<CollectionView kind="games"/>

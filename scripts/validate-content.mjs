@@ -17,7 +17,7 @@ const settings = read('content/site.json');
 validateSite(settings);
 for (const key of ['avatar', 'bannerDesktop', 'bannerMobile']) mediaExists(settings[key], `site.${key}`);
 let count = 0;
-for (const kind of ['music', 'movies', 'games', 'works']) {
+for (const kind of ['music', 'artists', 'movies', 'series', 'games', 'works']) {
   const ids = new Set();
   for (const file of fs.readdirSync(path.join(root, 'content', kind)).filter(file => file.endsWith('.json'))) {
     const source = `content/${kind}/${file}`;
@@ -26,6 +26,7 @@ for (const kind of ['music', 'movies', 'games', 'works']) {
     if (ids.has(value.id)) throw new Error(`${source}: 编号重复 ${value.id}`);
     ids.add(value.id);
     mediaExists(value.cover, source);
+    for (const photo of value.photos ?? []) mediaExists(photo, source);
     count++;
   }
 }

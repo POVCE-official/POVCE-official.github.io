@@ -1,0 +1,34 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import {Icon} from "astro-icon/components";
+import CollectionCards from "./CollectionCards.astro";
+import CollectionRows from "./CollectionRows.astro";
+import ArtistCards from "./ArtistCards.astro";
+import {collections,sectionConfig,copy} from "../data/collections";
+import type {CollectionKind} from "../data/collections";
+import "../styles/archive.css";
+interface Props {kind:CollectionKind;}
+const {kind}=Astro.props;
+const section=sectionConfig[kind];
+const items=collections.filter(item=>item.kind===kind);
+const tabs:CollectionKind[]=kind==="music"||kind==="artists"?["music","artists"]:kind==="movies"||kind==="series"?["movies","series"]:[];
+---
+<MainGridLayout title={section.title+(section.sub?" · "+section.sub:"")} description={section.description} page={section.page}>
+ <section class="archive-panel" data-collection>
+ <p class="archive-eyebrow">{section.title==="Music"?"SOUND ROOM":section.title==="Media"?"SCREEN ROOM":"PLAY ROOM"}</p><h1>{section.title}</h1><p class="archive-prose">{section.description}</p>
+ {tabs.length>0 && <nav class="section-tabs" aria-label={section.title+" 子分区"}>{tabs.map(tab=><a href={sectionConfig[tab].href} aria-current={kind===tab?"page":undefined}>{sectionConfig[tab].sub}<span>{collections.filter(item=>item.kind===tab).length}</span></a>)}</nav>}
+ {items.length ? <><div class="collection-controls"><input type="search" aria-label={copy.search} placeholder={kind==="artists"?"搜索艺人、团队或标签":copy.search} data-collection-search/><div class="status-filters"><button type="button" class="filter-chip" data-filter="" aria-pressed="true">{copy.all}</button>{section.statuses.map(status=><button type="button" class="filter-chip" data-filter={status} aria-pressed="false">{status}</button>)}</div><span class="sort-caption">收录日期 · 新到旧</span></div>{kind==="music" ? <CollectionRows items={items}/> : kind==="artists" ? <ArtistCards items={items}/> : <CollectionCards items={items}/>}<p data-no-results hidden role="status">{copy.noResults}</p></> : <div class="empty-state"><span class="shelf-icon"><Icon name={section.icon}/></span><h2>{section.empty}</h2><p>{kind==="artists"?"把喜欢的艺人、照片和官方链接慢慢收进来。":kind==="series"?"下一部值得追完的故事，从这里开始收藏。":"下一份喜欢，会成为这里的新收藏。"}</p></div>}
+ </section>
+</MainGridLayout>
+<script>
+ function filterShelf(root:Element){
+  const query=(root.querySelector<HTMLInputElement>('[data-collection-search]')?.value??'').toLowerCase().trim();
+  const status=root.querySelector<HTMLElement>('[data-filter][aria-pressed="true"]')?.dataset.filter??'';
+  let visible=0;
+  root.querySelectorAll<HTMLElement>('[data-entry]').forEach(card=>{card.hidden=Boolean((status&&card.dataset.status!==status)||(query&&!card.dataset.search?.includes(query)));if(!card.hidden)visible++;});
+  const empty=root.querySelector<HTMLElement>('[data-no-results]');if(empty)empty.hidden=visible>0;
+ }
+ // Delegated handlers work after Shirone replaces content with Swup.
+ document.addEventListener('input',event=>{const input=event.target;if(input instanceof HTMLInputElement&&input.matches('[data-collection-search]')){const root=input.closest('[data-collection]');if(root)filterShelf(root);}});
+ document.addEventListener('click',event=>{const target=event.target;if(!(target instanceof Element))return;const button=target.closest<HTMLElement>('[data-filter]');const root=button?.closest('[data-collection]');if(!button||!root)return;root.querySelectorAll('[data-filter]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));filterShelf(root);});
+</script>

@@ -1,0 +1,15 @@
+---
+import {Icon} from "astro-icon/components";
+import type {CollectionEntry} from "../data/collections";
+interface Props {items:CollectionEntry[];}
+const {items}=Astro.props;
+---
+<div class="artist-list">{items.map(artist=><article class="artist-card" data-entry data-status={artist.artistType??"Solo"} data-search={[artist.title,artist.note,...(artist.tags??[])].filter(Boolean).join(" ").toLowerCase()}>
+ <header class="artist-header">
+ {artist.cover ? <img class="artist-avatar" src={artist.cover} alt={artist.title} loading="lazy" width="96" height="96"/> : <span class="artist-avatar song-placeholder"><Icon name="material-symbols:person-outline-rounded"/></span>}
+ <div class="artist-info"><h2>{artist.title}</h2><span class="artist-type">{artist.artistType??"Solo"}</span>{artist.note && <p>{artist.note}</p>}{artist.tags?.length && <p class="song-tags">{artist.tags.map(tag=><span>#{tag}</span>)}</p>}</div>
+ {artist.url && <a class="official-link" href={artist.url} target="_blank" rel="noopener noreferrer">Official site <Icon name="material-symbols:arrow-outward-rounded"/></a>}
+ </header>
+ {artist.photos?.length ? <section class="artist-gallery" aria-label={artist.title + " · 照片墙"}><h3>Photo wall <span>{artist.photos.length} photos</span></h3><div class="photo-wall">{artist.photos.map((photo,index)=><a href={photo} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={artist.title + " · 查看照片 " + (index+1)}><img src={photo} alt={artist.title + " · 收藏照片 " + (index+1)} loading="lazy" width="480" height="360"/></a>)}</div></section> : <p class="gallery-empty">照片墙等待下一份收藏。</p>}
+ <footer class="artist-footer"><time datetime={artist.date}>收录于 {artist.date.replaceAll("-",".")}</time></footer>
+ </article>)}</div>
