@@ -89,5 +89,6 @@ body:has(#swup-container[data-current-page="about"]) .banner-stage__copy--contex
 @media(max-width:600px){.interactive-row{grid-template-columns:2.75rem minmax(0,1fr);gap:.4rem .65rem}.interactive-row time{grid-column:2;grid-row:2;text-align:left}.collection-grid[data-kind="games"]{grid-template-columns:repeat(2,minmax(0,1fr))}.interactive-poster .movie-date-toggle{min-width:2rem;min-height:2rem}}
 @media(prefers-reduced-motion:reduce){.cover-window img,.movie-poster{transition:none}.interactive-row:hover .cover-window img,.interactive-poster:hover .movie-poster,.interactive-row:has(.whole-link:focus-visible) .cover-window img,.interactive-poster:has(.whole-link:focus-visible) .movie-poster{transform:none}}
 
-/* No waiting caret while the home subtitle is empty between loops. */
-.banner-stage__copy--home p:empty::after{display:none!important}
+/* Preserve subtitle layout when hiding the empty waiting caret. */
+.banner-stage__copy--home p{min-block-size:1lh}
+.banner-stage__copy--home p:empty::after{visibility:hidden!important}
