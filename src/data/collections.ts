@@ -30,7 +30,7 @@ export const sectionConfig = {
 };
 export const copy = {
  label:"PERSONAL ARCHIVE", title:settings.homeTitle, description:settings.homeDescription,
- browse:"进入收藏", unit:"条收藏", latest:"Recently collected", latestHint:"收藏室刚刚开门，等待第一份喜欢。", empty:"收藏夹还是空的", home:"Home", all:"All", search:"搜索标题、创作者或标签", noResults:"没有找到匹配的收藏", link:"查看详情", aboutTitle:settings.aboutTitle, aboutText:settings.aboutText, aboutMore:settings.aboutMore, works:"设计作品", worksText:"偶尔做点设计，把完成的东西留在这里。", worksEmpty:"作品正在整理中。", notFound:"这个角落还没有内容。", notFoundTitle:"页面未找到", noteLabel:"收藏笔记",
+ browse:"进入收藏", unit:"条收藏", latest:"Recently collected", latestHint:"收藏室刚刚开门，等待第一份喜欢。", empty:"收藏夹还是空的", home:"Home", all:"All", search:"搜索标题、创作者或标签", noResults:"没有找到匹配的收藏", link:"查看详情", aboutTitle:settings.aboutTitle, aboutText:settings.aboutText, aboutMore:settings.aboutMore, works:"设计作品", worksText:"我是废物。", worksEmpty:"作品正在整理中。", notFound:"这个角落还没有内容。", notFoundTitle:"页面未找到", noteLabel:"收藏笔记",
 };
 export interface DesignWork {id:string;title:string;description:string;url?:string;cover?:string;date?:string;draft?:boolean;}
 const workFiles=import.meta.glob<Record<string,unknown>>("../../content/works/*.json",{eager:true,import:"default"});
