@@ -24,8 +24,8 @@ export const shelves = [
 export const sectionConfig = {
  music:{title:"Music",sub:"Songs",description:"一首歌、一张专辑，和反复按下播放的瞬间。",href:"/music/",page:"albums" as const,statuses:["常听","在听","想听"],empty:"还没有收录歌曲",icon:"material-symbols:headphones-rounded"},
  artists:{title:"Music",sub:"Artists",description:"喜欢的艺人、团队，和想收藏的每一个瞬间。",href:"/music/artists/",page:"albums" as const,statuses:["Solo","Band"],empty:"还没有收录艺人",icon:"material-symbols:person-outline-rounded"},
- movies:{title:"Media",sub:"Movie",description:"留住电影散场后，仍想回看的故事。",href:"/media/",page:"anime" as const,statuses:["已看","在看","想看"],empty:"还没有收录电影",icon:"material-symbols:movie-outline-rounded"},
- series:{title:"Media",sub:"Series",description:"剧集与番剧，慢慢追完，也慢慢收藏。",href:"/media/series/",page:"anime" as const,statuses:["已看","在看","想看"],empty:"还没有收录剧集或番剧",icon:"material-symbols:live-tv-rounded"},
+ movies:{title:"Media",sub:"Movie",description:"人死后，会去电影院",href:"/media/",page:"anime" as const,statuses:[],empty:"还没有收录电影",icon:"material-symbols:movie-outline-rounded"},
+ series:{title:"Media",sub:"Series",description:"剧集与番剧",href:"/media/series/",page:"anime" as const,statuses:[],empty:"还没有收录剧集或番剧",icon:"material-symbols:live-tv-rounded"},
  games:{title:"Game",sub:"",description:"走过的世界、未完的冒险，和手柄里的时光。",href:"/games/",page:"games" as const,statuses:["在玩","已通关","想玩","搁置"],empty:"还没有收录游戏",icon:"material-symbols:sports-esports-outline-rounded"},
 };
 export const copy = {

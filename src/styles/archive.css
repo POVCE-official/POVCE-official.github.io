@@ -36,3 +36,25 @@ body:has(#swup-container[data-current-page="about"]) .banner-stage__copy--contex
 .movie-caption time{display:block;font-size:.6rem;color:#ccc;font-variant-numeric:tabular-nums}.movie-notes{font-size:.65rem;margin-top:.35rem}.movie-notes summary{cursor:pointer}.movie-notes p{padding-top:.3rem}
 @media(max-width:600px){.collection-grid[data-kind="movies"]{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}}
 .gallery-more{margin-top:.65rem}.gallery-more>summary{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:2.75rem;padding:.5rem .85rem;border:1px solid var(--outline-variant);border-radius:var(--shape-corner-s);font-size:.8rem;color:var(--primary);cursor:pointer;list-style:none}.gallery-more>summary::-webkit-details-marker{display:none}.gallery-more>summary:hover{background:var(--primary-container);color:var(--on-primary-container)}.gallery-more>summary:focus-visible{outline:3px solid var(--primary);outline-offset:4px}.gallery-more>summary svg{width:1.1rem;height:1.1rem}.gallery-more[open]>summary{margin-bottom:.65rem}.gallery-more[open]>summary svg{transform:rotate(180deg)}.gallery-more[open] .gallery-expand,.gallery-more:not([open]) .gallery-collapse{display:none}
+
+
+ .collection-grid[data-kind="movies"] .entry{border:0;background:transparent;box-shadow:none}
+ .collection-grid[data-kind="movies"] .movie-caption{padding:2rem .75rem .8rem;overflow:visible;max-height:none}
+ .collection-grid[data-kind="movies"] .movie-caption h2{font-size:.94rem;line-height:1.4;font-weight:600;margin:0 0 .3rem;letter-spacing:.01em;text-align:left}
+ .collection-grid[data-kind="movies"] .movie-caption .movie-creator{font-size:.65rem;line-height:1.5;color:rgba(255,255,255,.72);margin:0;text-align:left}
+ .collection-grid[data-kind="movies"] .movie-info-line{display:flex;align-items:center;gap:.3rem;min-width:0}
+ .collection-grid[data-kind="movies"] .movie-info-line .movie-creator{flex:1;min-width:0}
+ .collection-grid[data-kind="movies"] .movie-caption .movie-hover-date{position:static;display:block;max-height:0;opacity:0;overflow:hidden;line-height:1.5;font-size:.6rem;letter-spacing:.035em;color:rgba(255,255,255,.62);text-align:left;margin-top:0;transition:opacity var(--m3e-duration-short) var(--m3e-easing-standard),max-height var(--m3e-duration-short) var(--m3e-easing-standard),margin-top var(--m3e-duration-short) var(--m3e-easing-standard)}
+ .collection-grid[data-kind="movies"] .movie-poster-card:focus-visible .movie-hover-date,.collection-grid[data-kind="movies"] .movie-poster-card:has(.movie-official:focus-visible) .movie-hover-date,.collection-grid[data-kind="movies"] .movie-poster-card:has(.movie-date-toggle input:checked) .movie-hover-date{max-height:2rem;opacity:1;margin-top:.4rem}
+ .collection-grid[data-kind="movies"] .movie-poster-card:focus-visible{outline:2px solid var(--primary);outline-offset:-3px}
+ .collection-grid[data-kind="movies"] .movie-date-toggle{position:relative;display:flex;align-items:center;justify-content:center;width:1.8rem;height:1.8rem;flex-shrink:0;border-radius:50%;cursor:pointer;color:rgba(255,255,255,.75)}
+ .collection-grid[data-kind="movies"] .movie-date-toggle input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+ .collection-grid[data-kind="movies"] .movie-date-toggle svg{width:1rem;height:1rem;pointer-events:none}
+ .collection-grid[data-kind="movies"] .movie-date-toggle:has(input:checked){background:rgba(255,255,255,.15);color:white}
+ .collection-grid[data-kind="movies"] .movie-date-toggle:has(input:focus-visible){outline:2px solid white;outline-offset:2px}
+ @media(hover:hover) and (pointer:fine){.collection-grid[data-kind="movies"] .movie-date-toggle{display:none}.collection-grid[data-kind="movies"] .movie-poster-card:hover .movie-hover-date{max-height:2rem;opacity:1;margin-top:.4rem}}
+ .collection-grid[data-kind="movies"] .movie-notes{margin-top:.5rem}
+ @media(max-width:600px){.collection-grid[data-kind="movies"] .movie-date-toggle{display:flex}.collection-grid[data-kind="movies"] .movie-caption{padding:1.7rem .6rem .65rem}.collection-grid[data-kind="movies"] .movie-caption h2{font-size:.85rem}.collection-grid[data-kind="movies"] .movie-caption .movie-hover-date{font-size:.57rem}}
+ @media(prefers-reduced-motion:reduce){.collection-grid[data-kind="movies"] .movie-hover-date{transition:none}}
+
+.collection-grid[data-kind="movies"] .movie-topline{justify-content:flex-end}

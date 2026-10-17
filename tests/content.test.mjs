@@ -46,9 +46,14 @@ test('artists support empty optional fields, photo walls and custom official lin
   for(const fields of [{},{artistType:'Solo',photos:[]},{artistType:'Band',photos:['/uploads/photo.webp','https://example.com/live.jpg'],url:'https://example.com/artist'},{artistType:null,photos:null,url:''}]) assert.doesNotThrow(()=>validateEntry({...artist,...fields},'artists','fixture'));
   for(const fields of [{photos:'photo.webp'},{photos:[null]},{photos:['javascript:alert(1)']},{photos:['/../secret']},{artistType:'other'},{url:'javascript:alert(1)'}]) assert.throws(()=>validateEntry({...artist,...fields},'artists','fixture'));
 });
-test('series has its own shelf and uses viewing statuses',()=>{
-  assert.doesNotThrow(()=>validateEntry({...valid,status:'在看'},'series','fixture'));
-  assert.throws(()=>validateEntry({...valid,status:'已通关'},'series','fixture'));
+test('media can be saved without viewing statuses and accepts existing CMS records',()=>{
+  const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
+  for(const kind of ['movies','series']){
+    for(const status of [undefined,null,'','已看','在看','想看']) assert.doesNotThrow(()=>validateEntry({...valid,status},kind,'fixture'));
+    assert.throws(()=>validateEntry({...valid,status:'已通关'},kind,'fixture'));
+    assert.ok(!config.content.find(item=>item.name===kind).fields.some(field=>field.name==='status'));
+    assert.ok(!config.content.find(item=>item.name===kind).view.fields.includes('status'));
+  }
 });
 test('collection dates determine newest-first order with a stable same-day tie break',()=>{
   const entries=[{id:'old',date:'2021-12-31'},{id:'b',date:'2026-01-01'},{id:'a',date:'2026-01-01'},{id:'middle',date:'2025-10-16'}];

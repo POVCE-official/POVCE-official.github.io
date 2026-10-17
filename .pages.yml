@@ -242,7 +242,6 @@
         "fields": [
           "title",
           "creator",
-          "status",
           "date",
           "draft"
         ],
@@ -286,20 +285,6 @@
           "name": "year",
           "label": "发行年份",
           "type": "string"
-        },
-        {
-          "name": "status",
-          "label": "收藏状态",
-          "type": "select",
-          "required": true,
-          "default": "已看",
-          "options": {
-            "values": [
-              "已看",
-              "在看",
-              "想看"
-            ]
-          }
         },
         {
           "name": "date",
@@ -358,7 +343,6 @@
         "fields": [
           "title",
           "creator",
-          "status",
           "date",
           "draft"
         ],
@@ -402,20 +386,6 @@
           "name": "year",
           "label": "发行年份",
           "type": "string"
-        },
-        {
-          "name": "status",
-          "label": "收藏状态",
-          "type": "select",
-          "required": true,
-          "default": "已看",
-          "options": {
-            "values": [
-              "已看",
-              "在看",
-              "想看"
-            ]
-          }
         },
         {
           "name": "date",
