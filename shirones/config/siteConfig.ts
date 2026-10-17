@@ -77,11 +77,11 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 				// 副标题逐字显示；关闭后直接显示完整副标题。
 				enable: true,
 				// 打字速度（每个字符间隔，毫秒）。
-				speed: 100,
+				speed: 100 / 0.9,
 				// 回退反向删除速度（每个字符间隔，毫秒）。
 				deleteSpeed: 50,
 				// 打字完成后停顿时间，单位为毫秒。
-				pauseTime: 2000,
+				pauseTime: 7000,
 				// 完成后是否循环播放；关闭表示只播放一次。
 				loop: true,
 			},
