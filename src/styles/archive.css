@@ -76,12 +76,15 @@ body:has(#swup-container[data-current-page="about"]) .banner-stage__copy--contex
 .cover-window img,.movie-poster{transition:transform 240ms var(--m3e-easing-standard)}
 @media(hover:hover) and (pointer:fine){.interactive-row:has(.whole-link):hover .cover-window img,.interactive-poster:has(.whole-link):hover .movie-poster{transform:scale(1.035)}.interactive-row:has(.whole-link):hover{background:var(--surface-container)}}
 .interactive-row:has(.whole-link:focus-visible) .cover-window img,.interactive-poster:has(.whole-link:focus-visible) .movie-poster{transform:scale(1.035)}
-.collection-grid[data-kind="games"]{grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;align-items:stretch}
-.collection-grid[data-kind="games"] .entry{display:flex;flex-direction:column;padding:.55rem;border-radius:calc(var(--shape-corner-l)/2)}
-.collection-grid[data-kind="games"] .entry img{flex-shrink:0;margin-bottom:.5rem;border-radius:calc(var(--shape-corner-m)/2)}
-.collection-grid[data-kind="games"] .entry h2{margin:.25rem 0}
-.collection-grid[data-kind="games"] .entry-date{margin:.375rem 0}
-.collection-grid[data-kind="games"] .quiet-link{align-self:flex-end;margin-top:auto;text-align:right}
+.collection-grid[data-kind="games"]{grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;align-items:start}
+.collection-grid[data-kind="games"] .entry{display:flex;flex-direction:column;container-type:inline-size;aspect-ratio:.85;min-height:0;overflow:hidden;padding:.55rem;border-radius:calc(var(--shape-corner-l)/2)}
+.collection-grid[data-kind="games"] .entry img{display:block;flex:0 0 auto;margin:0 0 .2rem;border-radius:calc(var(--shape-corner-m)/2)}
+.collection-grid[data-kind="games"] .entry h2{font-size:clamp(.65rem,7cqi,.95rem);line-height:1.25;margin:.08rem 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.collection-grid[data-kind="games"] .entry small{font-size:clamp(.55rem,4.5cqi,.65rem);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.collection-grid[data-kind="games"] .entry p{font-size:clamp(.6rem,5cqi,.75rem);line-height:1.25;margin:.08rem 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.collection-grid[data-kind="games"] .entry p:empty{display:none}
+.collection-grid[data-kind="games"] .entry-date{font-size:clamp(.55rem,4.5cqi,.65rem);line-height:1.2;margin:auto 0 .08rem;white-space:nowrap;flex-shrink:0}
+.collection-grid[data-kind="games"] .quiet-link{align-self:flex-end;margin-top:0;text-align:right;font-size:clamp(.6rem,5cqi,.75rem);line-height:1.2;flex-shrink:0}
 @media(max-width:900px){.interactive-row{grid-template-columns:3rem minmax(0,1fr) auto;column-gap:.65rem}}
 @media(max-width:600px){.interactive-row{grid-template-columns:2.75rem minmax(0,1fr);gap:.4rem .65rem}.interactive-row time{grid-column:2;grid-row:2;text-align:left}.collection-grid[data-kind="games"]{grid-template-columns:repeat(2,minmax(0,1fr))}.interactive-poster .movie-date-toggle{min-width:2rem;min-height:2rem}}
 @media(prefers-reduced-motion:reduce){.cover-window img,.movie-poster{transition:none}.interactive-row:hover .cover-window img,.interactive-poster:hover .movie-poster,.interactive-row:has(.whole-link:focus-visible) .cover-window img,.interactive-poster:has(.whole-link:focus-visible) .movie-poster{transform:none}}
