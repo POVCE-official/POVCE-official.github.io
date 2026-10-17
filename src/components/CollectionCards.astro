@@ -1,18 +1,18 @@
 ---
-import {copy} from "../data/collections";
 import {Icon} from "astro-icon/components";
 import type {CollectionEntry} from "../data/collections";
+import "../styles/collection-posters.css";
 interface Props {items: CollectionEntry[];}
 const {items}=Astro.props;
 ---
-<div class="collection-grid" data-kind={items[0]?.kind}>{items.map(item => <article class="entry" data-entry data-status={item.status} data-search={[item.title,item.creator,...(item.tags??[])].join(" ").toLowerCase()}>
- {item.kind==="movies"||item.kind==="series" ? <div class="movie-poster-card interactive-poster" tabindex={item.url?undefined:0} aria-label={item.url?undefined:item.title+" · 悬停或聚焦查看收录日期"}>
- {item.cover && <img class="movie-poster" src={item.cover} alt="" loading="lazy" width="400" height="600"/>}
- {item.url && <a class="whole-link" href={item.url} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={item.title+" · 官方详情页"}/>}
- <div class="movie-caption"><h2 title={item.title}>{item.title}</h2><div class="movie-info-line"><p class="movie-creator" title={[item.creator,item.year&&"上映于 "+item.year].filter(Boolean).join(" · ")}>{[item.creator,item.year].filter(Boolean).join(" · ")}</p><label class="movie-date-toggle"><input type="checkbox" aria-label={item.title+" · 显示收录日期"}/><Icon name="material-symbols:calendar-month-outline-rounded"/></label></div><time class="movie-hover-date" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>{item.note && <details class="movie-notes"><summary>收藏笔记</summary><p>{item.note}</p></details>}</div>
- </div> : <>
- {item.cover && <img src={item.cover} alt={item.title} loading="lazy" width="640" height="480"/>}
- <small>{item.status}{item.year && " · " + item.year}</small><h2>{item.title}</h2>{item.creator && <p>{item.creator}</p>}<p>{item.note}</p><time class="entry-date" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>
- {item.url && <a class="quiet-link" href={item.url} target="_blank" rel="noopener noreferrer">{copy.link}</a>}
- </>}
+<div class="collection-grid" data-kind={items[0]?.kind}>{items.map(item=><article class="entry archive-card" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase()} tabindex={item.url?undefined:0}>
+ {item.cover && <img class="card-cover" src={item.cover} alt="" loading="lazy" width={item.kind==="games"?480:400} height="600"/>}
+ <div class="card-bottom-shade"></div>
+ <div class="card-caption">
+  <div class="card-headline"><div class="card-meta">{item.year && <span class="card-year">{item.year}</span>}{item.creator && <span class="card-creator">{item.year?" · ":""}{item.creator}</span>}</div><h2 class="card-title" title={item.title}>{item.title}</h2></div>
+  <time class="card-collected" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>
+  {item.note && <details class="card-notes"><summary>收藏笔记</summary><p class="card-note-body">{item.note}</p></details>}
+ </div>
+ {item.url && <a class="card-destination" href={item.url} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={item.title+" · 官方详情页"}/>}
+ <label class="card-info-toggle" title="显示收藏资料"><input type="checkbox" aria-label={item.title+" · 显示收藏资料"}/><Icon name="material-symbols:calendar-month-outline-rounded"/></label>
 </article>)}</div>

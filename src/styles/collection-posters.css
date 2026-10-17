@@ -1,0 +1,33 @@
+
+/* Game, Movie and Series share one motion system. */
+.collection-grid[data-kind] .entry.archive-card{--card-motion-duration:480ms;--card-fade-duration:420ms;--card-image-duration:650ms;--card-motion-ease:cubic-bezier(.22,1,.36,1);--card-info-lift:22px;position:relative;isolation:isolate;display:block;aspect-ratio:2/3;min-height:0;padding:0;border:0;border-radius:var(--shape-corner-m);overflow:hidden;background:#181818;color:#fff}
+.collection-grid[data-kind="games"] .entry.archive-card{aspect-ratio:4/5}
+.collection-grid .entry.archive-card .card-cover{position:absolute;inset:0;display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;margin:0;border-radius:0;transition:transform var(--card-image-duration) var(--card-motion-ease)}
+.card-bottom-shade{position:absolute;inset:auto 0 0;height:44%;background:linear-gradient(transparent,rgba(0,0,0,.5) 36%,rgba(0,0,0,.9));transition:height var(--card-motion-duration) var(--card-motion-ease);pointer-events:none}
+.card-caption{position:absolute;left:.875rem;right:.875rem;bottom:.875rem;pointer-events:none}
+.card-headline{transform:translateY(0);transition:transform var(--card-motion-duration) var(--card-motion-ease)}
+.card-meta{display:flex;align-items:baseline;min-width:0;font-size:.5625rem;line-height:1.5;color:rgba(255,255,255,.78);margin-bottom:.375rem;white-space:nowrap;overflow:hidden}
+.card-year{flex-shrink:0}
+.card-creator{display:block;min-width:0;white-space:pre;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity var(--card-fade-duration) ease-in-out}
+.collection-grid .entry.archive-card .card-title{font-size:.94rem;line-height:1.3;font-weight:600;letter-spacing:-.015em;color:#fff;margin:0;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;text-shadow:0 1px 3px #0008}
+.card-collected{position:absolute;bottom:0;left:0;font-size:.5625rem;line-height:1.4;color:rgba(255,255,255,.7);opacity:0;transform:translateY(8px);transition:opacity var(--card-fade-duration) ease-in-out,transform var(--card-motion-duration) var(--card-motion-ease)}
+.card-destination{position:absolute;inset:0;z-index:3;border-radius:inherit}
+.card-destination:focus-visible{outline:2px solid var(--primary);outline-offset:-4px}
+.card-info-toggle{display:none;position:absolute;top:.5rem;right:.5rem;z-index:4;place-items:center;width:2rem;height:2rem;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;cursor:pointer}
+.card-info-toggle input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.card-info-toggle svg{width:1rem;height:1rem;pointer-events:none}
+.card-info-toggle:has(input:checked){background:rgba(0,0,0,.8)}
+.card-info-toggle:has(input:focus-visible){outline:2px solid #fff;outline-offset:2px}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-cover{transform:scale(1.035)}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-bottom-shade{height:68%}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-headline{transform:translateY(calc(-1 * var(--card-info-lift)))}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-creator{opacity:1}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-collected{opacity:1;transform:translateY(0)}
+.card-notes{position:absolute;bottom:0;right:0;z-index:4;font-size:.5625rem;line-height:1.4;opacity:0;pointer-events:none;transition:opacity var(--card-fade-duration) ease-in-out}
+.card-notes summary{cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:2px}
+.card-notes summary::-webkit-details-marker{display:none}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-notes{opacity:1;pointer-events:auto}
+.collection-grid .entry.archive-card .card-note-body{position:absolute;right:0;bottom:1.5rem;width:min(12rem,65vw);max-height:10rem;overflow:auto;padding:.65rem;margin:0;background:rgba(0,0,0,.94);border-radius:var(--shape-corner-s);color:#eee;font-size:.7rem;line-height:1.6;white-space:pre-line}
+@media(hover:none),(pointer:coarse),(max-width:600px){.card-info-toggle{display:grid}}
+@media(max-width:600px){.card-caption{left:.6rem;right:.6rem;bottom:.65rem}.collection-grid .entry.archive-card .card-title{font-size:.85rem}.card-meta,.card-collected,.card-notes{font-size:.57rem}}
+@media(prefers-reduced-motion:reduce){.archive-card *{transition:none!important}.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-cover{transform:none}}
