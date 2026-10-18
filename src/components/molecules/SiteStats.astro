@@ -1,0 +1,14 @@
+---
+import {collections,shelves} from "../../data/collections";
+const stats=shelves.map(shelf=>({...shelf,count:collections.filter(entry=>shelf.kinds.includes(entry.kind)).length}));
+---
+<section class="collection-stats" aria-label="收藏统计">
+ <dl>{stats.map(stat=><div><dt>{stat.title}</dt><dd>{stat.count}</dd></div>)}</dl>
+</section>
+<style>
+ .collection-stats{background:var(--card-bg);border-radius:var(--shape-corner-l);padding:1.5rem .75rem}
+ dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0}
+ dl>div{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+ dt{order:1;font-size:.75rem;line-height:1.5;color:var(--on-surface-variant)}
+ dd{margin:0;font-size:1.65rem;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--on-surface)}
+</style>
