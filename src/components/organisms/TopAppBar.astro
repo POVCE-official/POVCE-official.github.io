@@ -196,6 +196,13 @@ document.addEventListener('swup:content:replace', bindSearchTriggers);
 </script>}
 
 <style>
+ :global(#navbar #search-input-desktop:focus-visible){outline:none!important;box-shadow:none!important}
+ :global(#navbar .top-app-bar__search-shell:has(#search-input-desktop:focus-visible)){outline:1px solid var(--outline);outline-offset:3px}
+ :global(#navbar:has(.top-app-bar__search-shell--expanded)){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ :global(#navbar .top-app-bar__search-shell--expanded){background:rgba(27,27,27,.48)!important;backdrop-filter:blur(26px) saturate(105%);-webkit-backdrop-filter:blur(26px) saturate(105%);color:#f5f5f5}
+ :global(#navbar .top-app-bar__search-shell--expanded input){color:#f5f5f5!important;caret-color:#f5f5f5}
+ :global(#navbar .top-app-bar__search-shell--expanded input::placeholder){color:rgba(255,255,255,.65)}
+ :global(#navbar .top-app-bar__search-shell--expanded svg){color:#f5f5f5!important}
  :global(#nav-drawer-switch){display:none!important}
  .top-app-bar{animation:none!important;opacity:1!important;filter:none!important;will-change:auto!important}
  .top-app-bar:has(.archive-navigation[open]){backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
