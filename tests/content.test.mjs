@@ -19,6 +19,14 @@ test('rejects missing titles, invalid dates and status values from another shelf
 test('validates film, game and design schemas',()=>{
   for(const [kind,status] of [['movies','已看'],['games','在玩'],['works',undefined]]) assert.doesNotThrow(()=>validateEntry({...valid,status},kind,'fixture'));
 });
+test('games can be collected without inventing a play status',()=>{
+  for(const status of [undefined,null,'','在玩','已通关']) assert.doesNotThrow(()=>validateEntry({...valid,status},'games','fixture'));
+  assert.throws(()=>validateEntry({...valid,status:'已看'},'games','fixture'));
+  const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
+  const field=config.content.find(item=>item.name==='games').fields.find(field=>field.name==='status');
+  assert.equal(field.required,false);
+  assert.ok(!Object.hasOwn(field,'default'));
+});
 test('rejects executable URLs, protocol-relative URLs and path traversal',()=>{
   for(const url of ['javascript:alert(1)','data:text/html,test','//example.com/a.png','/../secret','/a\\b','https://user:password@example.com']) assert.throws(()=>validateUrl(url,'fixture',true));
   for(const url of ['/uploads/封面.webp','https://example.com/a?q=test']) assert.doesNotThrow(()=>validateUrl(url,'fixture',true));

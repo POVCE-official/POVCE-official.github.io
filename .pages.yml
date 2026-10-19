@@ -493,8 +493,7 @@
           "name": "status",
           "label": "收藏状态",
           "type": "select",
-          "required": true,
-          "default": "在玩",
+          "required": false,
           "options": {
             "values": [
               "在玩",
