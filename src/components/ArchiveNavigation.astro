@@ -13,7 +13,7 @@ const label=items.find(item=>item.key===key)?.name ?? (Astro.url.pathname.starts
  summary{height:40px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 14px;list-style:none;cursor:pointer;font-size:14px;font-weight:600;background:none;border:0}
  summary::-webkit-details-marker{display:none}
  summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
- .archive-navigation-panel{position:absolute;right:0;top:calc(100% + 8px);width:210px;box-sizing:border-box;padding:8px;border-radius:18px;background:rgba(27,27,27,.48);color:#f5f5f5;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(26px) saturate(105%);-webkit-backdrop-filter:blur(26px) saturate(105%);box-shadow:0 12px 32px rgba(0,0,0,.18);transform-origin:top right}
+ .archive-navigation-panel{position:absolute;right:0;top:calc(100% + 8px);width:210px;box-sizing:border-box;padding:8px;border-radius:18px;background:rgba(27,27,27,.48);color:#f5f5f5;border:0;backdrop-filter:blur(26px) saturate(105%);-webkit-backdrop-filter:blur(26px) saturate(105%);box-shadow:0 12px 32px rgba(0,0,0,.18);transform-origin:top right}
  .archive-navigation-panel::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
  nav a{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:11px;color:inherit;text-decoration:none;font-size:14px;line-height:1.4}
  nav a span{color:#aaa;font-size:12px}
