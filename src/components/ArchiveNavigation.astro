@@ -1,0 +1,51 @@
+---
+import {resolvePageKey} from "@utils/nav-utils";
+const items=[{name:"Home",href:"/",key:"home"},{name:"Music",href:"/music/",key:"music"},{name:"Media",href:"/media/",key:"media"},{name:"Game",href:"/games/",key:"games"},{name:"About",href:"/about/",key:"about"}];
+const key=resolvePageKey(Astro.url);
+const label=items.find(item=>item.key===key)?.name ?? (Astro.url.pathname.startsWith("/works")?"设计作品":"导航");
+---
+<details class="archive-navigation">
+ <summary aria-label={`${label}，展开导航`}><span data-navigation-label>{label}</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+ <nav class="archive-navigation-panel" aria-label="Main navigation">{items.map(item=><a href={item.href} data-section-key={item.key} aria-current={item.key===key?"page":undefined}>{item.name}<span aria-hidden="true">{item.key===key?"•":"↗"}</span></a>)}</nav>
+</details>
+<style>
+ .archive-navigation{position:relative;margin-left:auto;margin-right:12px;color:var(--on-surface)}
+ summary{height:40px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 14px;list-style:none;cursor:pointer;font-size:14px;font-weight:600;background:none;border:0}
+ summary::-webkit-details-marker{display:none}
+ summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+ .archive-navigation-panel{position:absolute;right:0;top:calc(100% + 8px);width:210px;box-sizing:border-box;padding:8px;border-radius:18px;background:rgba(27,27,27,.48);color:#f5f5f5;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(26px) saturate(105%);-webkit-backdrop-filter:blur(26px) saturate(105%);box-shadow:0 12px 32px rgba(0,0,0,.18);transform-origin:top right}
+ .archive-navigation-panel::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+ nav a{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:11px;color:inherit;text-decoration:none;font-size:14px;line-height:1.4}
+ nav a span{color:#aaa;font-size:12px}
+ nav a[aria-current="page"]{background:rgba(255,255,255,.1)}
+ nav a:hover,nav a:focus-visible{background:rgba(255,255,255,.16)}
+ @media(max-width:400px){.archive-navigation{margin-right:4px}summary{padding:0 8px}}
+</style>
+<script>
+ import {resolvePageKey} from "@utils/nav-utils";
+ const menu=document.querySelector<HTMLDetailsElement>(".archive-navigation");
+ if(menu){
+  const panel=menu.querySelector<HTMLElement>("nav")!;
+  const summary=menu.querySelector("summary")!;
+  const hover=matchMedia("(hover:hover) and (pointer:fine)");
+  let closeTimer:ReturnType<typeof setTimeout>;
+  const close=()=>{clearTimeout(closeTimer);menu.open=false};
+  menu.addEventListener("pointerenter",()=>{if(hover.matches){clearTimeout(closeTimer);menu.open=true}});
+  menu.addEventListener("pointerleave",()=>{if(hover.matches)closeTimer=setTimeout(()=>{if(!panel.contains(document.activeElement))close()},180)});
+  summary.addEventListener("click",event=>{if(hover.matches){event.preventDefault();menu.open=true}});
+  menu.addEventListener("focusout",()=>setTimeout(()=>{if(!menu.matches(":hover")&&!menu.contains(document.activeElement))close()},0));
+  menu.addEventListener("toggle",()=>{
+   panel.getAnimations().forEach(animation=>animation.cancel());
+   if(menu.open&&!matchMedia("(prefers-reduced-motion: reduce)").matches&&!document.documentElement.classList.contains("motion-reduced"))panel.animate([{opacity:0,transform:"translateY(-5px) scale(.99)"},{opacity:1,transform:"translateY(0) scale(1)"}],{duration:420,easing:"cubic-bezier(.22,1,.36,1)"});
+  });
+  document.addEventListener("pointerdown",event=>{if(!menu.contains(event.target as Node))close()});
+  document.addEventListener("keydown",event=>{if(event.key==="Escape"&&menu.open){close();summary.focus()}});
+  panel.addEventListener("click",event=>{if((event.target as Element).closest("a"))close()});
+  const sync=()=>{
+   close();const key=resolvePageKey(new URL(location.href));let label=location.pathname.startsWith("/works")?"设计作品":"导航";
+   panel.querySelectorAll<HTMLAnchorElement>("a[data-section-key]").forEach(link=>{const active=link.dataset.sectionKey===key;if(active){link.setAttribute("aria-current","page");label=link.firstChild?.textContent??label}else link.removeAttribute("aria-current");link.querySelector("span")!.textContent=active?"•":"↗"});
+   menu.querySelector("[data-navigation-label]")!.textContent=label;summary.setAttribute("aria-label",`${label}，展开导航`);
+  };
+  document.addEventListener("swup:content:replace",sync);window.addEventListener("popstate",sync);
+ }
+</script>
