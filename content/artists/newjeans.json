@@ -1,0 +1,37 @@
+{
+  "id": "newjeans",
+  "title": "NewJeans",
+  "artistType": "Band",
+  "note": "NewJeans（뉴진스），2022 年由 ADOR 推出的韩国女子音乐组合。出道阵容为 MINJI、HANNI、DANIELLE、HAERIN 和 HYEIN；音乐融合 Pop 与 R&B，代表作品包括《Attention》《Hype Boy》《Ditto》《OMG》和《Super Shy》。",
+  "tags": [
+    "K-pop",
+    "Pop",
+    "R&B"
+  ],
+  "url": "https://www.instagram.com/newjeans_official/",
+  "date": "2023-12-13",
+  "photos": [
+    "/uploads/artists/newjeans-01.webp",
+    "/uploads/artists/newjeans-02.webp",
+    "/uploads/artists/newjeans-03.webp",
+    "/uploads/artists/newjeans-04.webp",
+    "/uploads/artists/newjeans-05.webp",
+    "/uploads/artists/newjeans-06.webp",
+    "/uploads/artists/newjeans-07.webp",
+    "/uploads/artists/newjeans-08.webp",
+    "/uploads/artists/newjeans-09.webp",
+    "/uploads/artists/newjeans-10.webp",
+    "/uploads/artists/newjeans-11.webp",
+    "/uploads/artists/newjeans-12.webp",
+    "/uploads/artists/newjeans-13.webp",
+    "/uploads/artists/newjeans-14.webp",
+    "/uploads/artists/newjeans-15.webp",
+    "/uploads/artists/newjeans-20.webp",
+    "/uploads/artists/newjeans-16.webp",
+    "/uploads/artists/newjeans-17.webp",
+    "/uploads/artists/newjeans-18.webp",
+    "/uploads/artists/newjeans-19.webp"
+  ],
+  "draft": false,
+  "cover": "/uploads/artists/newjeans-16.webp"
+}
