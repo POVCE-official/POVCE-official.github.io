@@ -17,13 +17,14 @@ test('rejects missing titles, invalid dates and status values from another shelf
   for(const change of [{title:''},{date:'2026-02-30'},{date:'bad'},{status:'已通关'},{draft:'false'},{tags:'音乐'}]) assert.throws(()=>validateEntry({...valid,...change},'music','fixture'));
 });
 test('validates film, game and design schemas',()=>{
-  for(const [kind,status] of [['movies','已看'],['games','在玩'],['works',undefined]]) assert.doesNotThrow(()=>validateEntry({...valid,status},kind,'fixture'));
+  for(const [kind,status] of [['movies','已看'],['games','未通关'],['works',undefined]]) assert.doesNotThrow(()=>validateEntry({...valid,status},kind,'fixture'));
 });
 test('games can be collected without inventing a play status',()=>{
-  for(const status of [undefined,null,'','在玩','已通关']) assert.doesNotThrow(()=>validateEntry({...valid,status},'games','fixture'));
-  assert.throws(()=>validateEntry({...valid,status:'已看'},'games','fixture'));
+  for(const status of [undefined,null,'','已通关','未通关']) assert.doesNotThrow(()=>validateEntry({...valid,status},'games','fixture'));
+  for(const status of ['在玩','想玩','搁置','已看']) assert.throws(()=>validateEntry({...valid,status},'games','fixture'));
   const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
   const field=config.content.find(item=>item.name==='games').fields.find(field=>field.name==='status');
+  assert.deepEqual(field.options.values,['已通关','未通关']);
   assert.equal(field.required,false);
   assert.ok(!Object.hasOwn(field,'default'));
 });

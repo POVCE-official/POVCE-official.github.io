@@ -26,7 +26,7 @@ export const sectionConfig = {
  artists:{title:"Music",sub:"Artists",description:"喜欢的艺人、团队，和想收藏的每一个瞬间。",href:"/music/artists/",page:"albums" as const,statuses:["Solo","Band"],empty:"还没有收录艺人",icon:"material-symbols:person-outline-rounded"},
  movies:{title:"Media",sub:"Movie",description:"人死后，会去电影院",href:"/media/",page:"anime" as const,statuses:[],empty:"还没有收录电影",icon:"material-symbols:movie-outline-rounded"},
  series:{title:"Media",sub:"Series",description:"剧集与番剧",href:"/media/series/",page:"anime" as const,statuses:[],empty:"还没有收录剧集或番剧",icon:"material-symbols:live-tv-rounded"},
- games:{title:"Game",sub:"",description:"No Promises Await at Journey's End",href:"/games/",page:"games" as const,statuses:["在玩","已通关","想玩","搁置"],empty:"还没有收录游戏",icon:"material-symbols:sports-esports-outline-rounded"},
+ games:{title:"Game",sub:"",description:"No Promises Await at Journey's End",href:"/games/",page:"games" as const,statuses:["已通关","未通关"],empty:"还没有收录游戏",icon:"material-symbols:sports-esports-outline-rounded"},
 };
 export const copy = {
  label:"PERSONAL ARCHIVE", title:settings.homeTitle, description:settings.homeDescription,

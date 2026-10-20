@@ -491,15 +491,13 @@
         },
         {
           "name": "status",
-          "label": "收藏状态",
+          "label": "通关状态",
           "type": "select",
           "required": false,
           "options": {
             "values": [
-              "在玩",
               "已通关",
-              "想玩",
-              "搁置"
+              "未通关"
             ]
           }
         },

@@ -2,7 +2,7 @@ export const statuses = {
   music: ['常听', '在听', '想听'],
   movies: ['已看', '在看', '想看'],
   series: ['已看', '在看', '想看'],
-  games: ['在玩', '已通关', '想玩', '搁置'],
+  games: ['已通关', '未通关'],
 };
 
 function fail(source, message) { throw new Error(`${source}: ${message}`); }
