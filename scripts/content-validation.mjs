@@ -37,6 +37,11 @@ export function validateEntry(value, kind, source) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value.date) || !Number.isFinite(Date.parse(value.date)) || new Date(value.date).toISOString().slice(0, 10) !== value.date) fail(source, '收录日期须为有效的 YYYY-MM-DD 日期');
   if (value.draft !== undefined && typeof value.draft !== 'boolean') fail(source, '暂不展示必须是开关值');
   for (const key of ['creator', 'year', 'note', 'description']) text(value[key], `${source}.${key}`);
+  if (['movies','series','games'].includes(kind)) {
+    text(value.groupId, `${source}.groupId`);
+    text(value.groupLabel, `${source}.groupLabel`);
+    if (value.groupOrder != null && (!Number.isInteger(value.groupOrder) || value.groupOrder < 1)) fail(source, '合集顺序须为大于0的整数');
+  }
   if (kind in statuses && !(value.status == null || value.status === '') && !statuses[kind].includes(value.status)) fail(source, '收藏状态与分类不匹配');
   if (kind === 'artists') {
     if (value.artistType != null && !['Solo', 'Band'].includes(value.artistType)) fail(source, '艺人类型须为 Solo 或 Band');

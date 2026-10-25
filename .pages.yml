@@ -277,6 +277,24 @@
           "required": true
         },
         {
+          "name": "groupId",
+          "label": "合集编号",
+          "type": "string",
+          "description": "同一分区中填写相同编号的条目合并为一张卡片；留空则独立显示。"
+        },
+        {
+          "name": "groupLabel",
+          "label": "合集切换标签",
+          "type": "string",
+          "description": "例如 1、2、OVA；留空自动显示序号。"
+        },
+        {
+          "name": "groupOrder",
+          "label": "合集内顺序",
+          "type": "number",
+          "description": "从1开始，按季数或作品先后填写；合集在页面上按其中最新的收录日期排序。"
+        },
+        {
           "name": "creator",
           "label": "导演 / 主创",
           "type": "string"
@@ -376,6 +394,24 @@
           "label": "剧集 / 番剧名称",
           "type": "string",
           "required": true
+        },
+        {
+          "name": "groupId",
+          "label": "合集编号",
+          "type": "string",
+          "description": "同一分区中填写相同编号的条目合并为一张卡片；留空则独立显示。"
+        },
+        {
+          "name": "groupLabel",
+          "label": "合集切换标签",
+          "type": "string",
+          "description": "例如 1、2、OVA；留空自动显示序号。"
+        },
+        {
+          "name": "groupOrder",
+          "label": "合集内顺序",
+          "type": "number",
+          "description": "从1开始，按季数或作品先后填写；合集在页面上按其中最新的收录日期排序。"
         },
         {
           "name": "creator",
@@ -478,6 +514,24 @@
           "label": "作品名称",
           "type": "string",
           "required": true
+        },
+        {
+          "name": "groupId",
+          "label": "合集编号",
+          "type": "string",
+          "description": "同一分区中填写相同编号的条目合并为一张卡片；留空则独立显示。"
+        },
+        {
+          "name": "groupLabel",
+          "label": "合集切换标签",
+          "type": "string",
+          "description": "例如 1、2、OVA；留空自动显示序号。"
+        },
+        {
+          "name": "groupOrder",
+          "label": "合集内顺序",
+          "type": "number",
+          "description": "从1开始，按季数或作品先后填写；合集在页面上按其中最新的收录日期排序。"
         },
         {
           "name": "creator",

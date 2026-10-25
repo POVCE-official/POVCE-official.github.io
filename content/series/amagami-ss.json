@@ -4,11 +4,14 @@
   "creator": "Yoshimasa Hiraike",
   "year": "2010",
   "date": "2026-10-26",
-  "cover": "/uploads/series/amagami-ss.webp",
+  "cover": "/uploads/series/amagami-ss-clear.webp",
   "url": "https://anilist.co/anime/8676",
   "tags": [
     "Amagami SS",
     "TV动画"
   ],
-  "draft": false
+  "draft": false,
+  "groupId": "amagami-ss",
+  "groupLabel": "1",
+  "groupOrder": 1
 }

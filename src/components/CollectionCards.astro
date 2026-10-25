@@ -1,18 +1,14 @@
 ---
-import {Icon} from "astro-icon/components";
 import type {CollectionEntry} from "../data/collections";
+import {groupEntries} from "../../scripts/collection-groups.mjs";
+import CollectionCardFace from "./CollectionCardFace.astro";
+import MergedCollectionCard from "./MergedCollectionCard.astro";
 import "../styles/collection-posters.css";
 interface Props {items: CollectionEntry[];}
 const {items}=Astro.props;
+const groups=groupEntries(items) as CollectionEntry[][];
 ---
-<div class="collection-grid" data-kind={items[0]?.kind}>{items.map(item=><article class="entry archive-card" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase()} tabindex={item.url?undefined:0}>
- {item.cover && <img class="card-cover" src={item.cover} alt="" loading="lazy" width={item.kind==="games"?480:400} height="600"/>}
- <div class="card-bottom-shade"></div>
- <div class="card-caption">
-  <div class="card-headline"><div class="card-meta">{item.year && <span class="card-year">{item.year}</span>}{item.creator && <span class="card-creator">{item.year?" · ":""}{item.creator}</span>}</div><h2 class="card-title" title={item.title}>{item.title}</h2></div>
-  <time class="card-collected" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>
-  {item.note && <details class="card-notes"><summary>收藏笔记</summary><p class="card-note-body">{item.note}</p></details>}
- </div>
- {item.url && <a class="card-destination" href={item.url} target="_blank" rel="noopener noreferrer" data-no-swup aria-label={item.title+" · 官方详情页"}/>}
- <label class="card-info-toggle" title="显示收藏资料"><input type="checkbox" aria-label={item.title+" · 显示收藏资料"}/><Icon name="material-symbols:calendar-month-outline-rounded"/></label>
-</article>)}</div>
+<div class="collection-grid" data-kind={items[0]?.kind}>{groups.map(members=>{
+ const item=members[0];
+ return members.length>1?<MergedCollectionCard items={members}/>:<article class="entry archive-card" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase()} tabindex={item.url?undefined:0}><CollectionCardFace item={item}/></article>;
+})}</div>

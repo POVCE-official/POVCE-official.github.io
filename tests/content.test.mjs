@@ -3,6 +3,36 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {validateEntry,validateSite,validateUrl} from '../scripts/content-validation.mjs';
 import {newestFirst} from '../scripts/collection-order.mjs';
+import {groupEntries,matchesCollection} from '../scripts/collection-groups.mjs';
+
+test('collections keep newest-date placement, explicit member order and separate shelves',()=>{
+ const items=[
+  {id:'first',kind:'series',date:'2025-01-01',groupId:'shared',groupOrder:1},
+  {id:'other',kind:'series',date:'2026-03-01'},
+  {id:'second',kind:'series',date:'2026-04-01',groupId:'shared',groupOrder:2},
+  {id:'shared',kind:'series',date:'2026-02-01'},
+  {id:'game',kind:'games',date:'2026-01-01',groupId:'shared'},
+ ];
+ const groups=groupEntries(items);
+ assert.deepEqual(groups.map(group=>group.map(item=>item.id)),[['first','second'],['other'],['shared'],['game']]);
+ assert.equal(items[0].id,'first');
+});
+test('collection search and status must match the same member',()=>{
+ assert.equal(matchesCollection('final fantasy vii rebirth square enix','已通关','rebirth','已通关'),true);
+ assert.equal(matchesCollection('final fantasy vii remake square enix','未通关','rebirth','未通关'),false);
+ assert.equal(matchesCollection('final fantasy vii rebirth square enix','已通关','rebirth','未通关'),false);
+ assert.equal(matchesCollection('anything','','',''),true);
+});
+test('optional CMS grouping accepts blank fields and rejects invalid member order',()=>{
+ const entry={id:'season',title:'Season',date:'2026-10-26'};
+ for(const kind of ['movies','series','games']){
+  assert.doesNotThrow(()=>validateEntry({...entry,groupId:'collection',groupLabel:'OVA',groupOrder:3},kind,'fixture'));
+  assert.doesNotThrow(()=>validateEntry({...entry,groupId:'',groupLabel:null,groupOrder:null},kind,'fixture'));
+  for(const groupOrder of [0,-1,1.5,'2'])assert.throws(()=>validateEntry({...entry,groupOrder},kind,'fixture'));
+ }
+ const config=JSON.parse(fs.readFileSync(new URL('../.pages.yml',import.meta.url),'utf8'));
+ for(const name of ['movies','series','games'])for(const field of ['groupId','groupLabel','groupOrder'])assert.ok(config.content.find(section=>section.name===name).fields.some(item=>item.name===field));
+});
 
 const valid={id:'test-item',title:'验证条目',date:'2026-10-16',status:'常听'};
 test('Songs can be saved without a listening status after removing the classification',()=>{

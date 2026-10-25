@@ -8,6 +8,7 @@ export interface CollectionEntry {
  year?: string; status?: string; note?: string; tags?: string[];
  cover?: string; url?: string; date: string; draft?: boolean;
  artistType?: "Solo" | "Band"; photos?: string[];
+ groupId?: string; groupLabel?: string; groupOrder?: number;
 }
 const files = import.meta.glob<Record<string, unknown>>("../../content/{music,artists,movies,series,games}/*.json", {eager:true,import:"default"});
 export const collections: CollectionEntry[] = Object.entries(files).map(([file,value])=>{

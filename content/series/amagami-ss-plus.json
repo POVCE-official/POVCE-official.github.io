@@ -4,11 +4,14 @@
   "creator": "Tomoki Kobayashi",
   "year": "2012",
   "date": "2026-10-26",
-  "cover": "/uploads/series/amagami-ss-plus.webp",
+  "cover": "/uploads/series/amagami-ss-plus-clear.webp",
   "url": "https://anilist.co/anime/11235",
   "tags": [
     "Amagami SS+ plus",
     "TV动画"
   ],
-  "draft": false
+  "draft": false,
+  "groupId": "amagami-ss",
+  "groupLabel": "2",
+  "groupOrder": 2
 }

@@ -1,8 +1,16 @@
+import {matchesCollection} from '../../scripts/collection-groups.mjs';
 function filterShelf(root:Element){
   const query=(root.querySelector<HTMLInputElement>('[data-collection-search]')?.value??'').toLowerCase().trim();
   const status=root.querySelector<HTMLElement>('[data-filter][aria-pressed="true"]')?.dataset.filter??'';
   let visible=0;
-  root.querySelectorAll<HTMLElement>('[data-entry]').forEach(card=>{card.hidden=Boolean((status&&card.dataset.status!==status)||(query&&!card.dataset.search?.includes(query)));if(!card.hidden)visible++;});
+  root.querySelectorAll<HTMLElement>('[data-entry]').forEach(card=>{
+   const panes=Array.from(card.querySelectorAll<HTMLElement>('[data-pane]'));
+   if(panes.length){
+    const matches=panes.map((pane,index)=>matchesCollection(pane.dataset.search??'',pane.dataset.status??'',query,status)?index:-1).filter(index=>index>=0);
+    card.hidden=!matches.length;card.dispatchEvent(new CustomEvent('collection:filter',{detail:matches}));
+   }else card.hidden=!matchesCollection(card.dataset.search??'',card.dataset.status??'',query,status);
+   if(!card.hidden)visible++;
+  });
   const empty=root.querySelector<HTMLElement>('[data-no-results]');if(empty)empty.hidden=visible>0;
  }
  // Delegated handlers work after Shirone replaces content with Swup.

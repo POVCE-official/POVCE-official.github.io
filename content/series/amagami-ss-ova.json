@@ -3,11 +3,14 @@
   "title": "アマガミSS OVA",
   "year": "2011",
   "date": "2026-10-26",
-  "cover": "/uploads/series/amagami-ss-ova.webp",
+  "cover": "/uploads/series/amagami-ss-ova-clear.webp",
   "url": "https://anilist.co/anime/9117",
   "tags": [
     "Amagami SS OVA",
     "OVA"
   ],
-  "draft": false
+  "draft": false,
+  "groupId": "amagami-ss",
+  "groupLabel": "OVA",
+  "groupOrder": 3
 }

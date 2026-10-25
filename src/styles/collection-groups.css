@@ -1,0 +1,32 @@
+
+ .season-card{--season-index:0;touch-action:pan-y;outline-offset:4px}
+ .season-track{position:absolute;inset:0}
+ .season-pane{position:absolute;inset:0;transform:translateX(calc((var(--pane-index) - var(--season-index)) * 100%));transition:transform 600ms cubic-bezier(.22,1,.36,1),visibility 0s}
+ .season-pane[aria-hidden="true"]{visibility:hidden;transition:transform 600ms cubic-bezier(.22,1,.36,1),visibility 0s 600ms}
+ .season-pane[aria-hidden="false"]{visibility:visible}
+ .season-top{position:absolute;inset:.6rem .6rem auto;z-index:5;display:flex;align-items:start;pointer-events:none}
+ .season-switch{position:relative;box-sizing:border-box;width:2.8rem;height:1.85rem;overflow:hidden;border-radius:.925rem;background:#181818a6;backdrop-filter:blur(16px);transition:width 560ms cubic-bezier(.22,1,.36,1),background 360ms ease}
+ .season-badge{position:absolute;top:0;left:0;width:2.8rem;height:1.85rem;display:grid;place-items:center;font-size:.75rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap;color:#fff;transition:opacity 180ms ease,transform 420ms cubic-bezier(.22,1,.36,1)}
+ .season-tabs{position:absolute;top:0;left:0;display:flex;align-items:center;gap:.125rem;box-sizing:border-box;height:1.85rem;padding:.175rem;opacity:0;transform:translateX(-.35rem);transition:opacity 180ms ease,transform 420ms cubic-bezier(.22,1,.36,1);pointer-events:none}
+ .season-tabs button{box-sizing:border-box;display:grid;place-items:center;flex:0 0 1.5rem;width:1.5rem;height:1.5rem;min-width:0;min-height:0;font:inherit;font-size:.7rem;font-weight:500;line-height:1;padding:0;border:0;border-radius:50%;background:transparent;color:#fffb;cursor:pointer;opacity:0;transform:translateX(-.3rem);transition:background 250ms,color 250ms,opacity 240ms ease,transform 440ms cubic-bezier(.22,1,.36,1)}
+ .season-tabs button[data-wide-label]{flex-basis:2.2rem;width:2.2rem;border-radius:.75rem;font-size:.6rem;letter-spacing:.015em}
+ .season-tabs button[aria-pressed="true"]{background:#fff;color:#171717}
+ .season-tabs button:focus-visible,.season-arrows button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+ .season-arrows{position:absolute;inset:0 .5rem;z-index:5;display:flex;justify-content:space-between;align-items:center;pointer-events:none;opacity:0;transform:translateY(5px);transition:opacity 320ms ease,transform 480ms cubic-bezier(.22,1,.36,1)}
+ .season-arrows button{display:grid;place-items:center;width:1.8rem;height:1.8rem;border:0;border-radius:50%;background:#1818189c;backdrop-filter:blur(12px);color:#fff;cursor:pointer;pointer-events:none;transition:background 250ms}
+ .season-arrows button:hover{background:#181818e6}
+ .season-arrows svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-switch{width:var(--group-expanded-width,5.8rem);background:#181818bd}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-tabs,.season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-arrows{opacity:1;transform:translate(0);transition-delay:70ms}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-tabs button{opacity:1;transform:translateX(0);transition-delay:80ms}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-tabs button:nth-child(2){transition-delay:115ms}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-tabs button:nth-child(3){transition-delay:150ms}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-badge{opacity:0;transform:translateX(-.35rem)}
+ .season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-tabs,.season-card:is(:hover,:has(:focus-visible),:focus-visible) .season-arrows button{pointer-events:auto}
+ .season-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ @media(hover:none),(pointer:coarse){.season-switch{width:var(--group-expanded-width,5.8rem)}.season-tabs,.season-tabs button{opacity:1;transform:none;pointer-events:auto}.season-badge{display:none}.season-arrows{opacity:1;transform:none}.season-arrows button{pointer-events:auto}}
+ @media(prefers-reduced-motion:reduce){.season-track,.season-pane,.season-top *,.season-arrows{transition:none!important}}
+
+.group-fallback{position:absolute;inset:0 0 auto;z-index:7;padding:.7rem;margin:0;background:#181818e8;list-style:none;font-size:.7rem}.group-fallback a{display:block;padding:.3rem;color:white}.group-fallback~.season-top{display:none}
+
+.season-tabs button:disabled{opacity:.35!important;cursor:default}.season-arrows button:disabled{opacity:.3;cursor:default}.season-tabs{max-width:100%;overflow-x:auto;scrollbar-width:none}.season-tabs::-webkit-scrollbar{display:none}.season-switch{max-width:100%}
