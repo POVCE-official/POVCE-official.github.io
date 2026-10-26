@@ -2,5 +2,29 @@
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import {copy,works} from "../data/collections";
 import "../styles/archive.css";
+import "../styles/works.css";
 ---
-<MainGridLayout title={copy.works} description={copy.worksText} page="projects"><section class="archive-panel"><h1>{copy.works}</h1><p class="archive-prose">{copy.worksText}</p>{works.length?works.map(work=><article class="entry">{work.cover && <img src={work.cover} alt={work.title} loading="lazy" width="640" height="480"/>}<h2>{work.title}</h2><p>{work.description}</p>{work.url && <a class="quiet-link" href={work.url} target="_blank" rel="noopener noreferrer">{copy.link}</a>}</article>):<div class="empty-state"><p>{copy.worksEmpty}</p></div>}<a class="quiet-link" href="/about/">{copy.aboutTitle}</a></section></MainGridLayout>
+<MainGridLayout title={copy.works} description={copy.worksText} page="projects">
+  <section class="archive-panel">
+    <h1>{copy.works}</h1>
+    <p class="archive-prose">{copy.worksText}</p>
+    {works.length ? <div class="works-grid">{works.map(work =>
+      <details class="work-card">
+        <summary class="work-face">
+          {work.cover && <img class="work-cover" src={work.cover} alt={work.title} loading="lazy" width="640" height="480"/>}
+          <div class="work-glass">
+            <h2>{work.title}</h2>
+            <p>{work.description}</p>
+            <span class="work-disclosure">作品介绍 <span aria-hidden="true">＋</span></span>
+          </div>
+        </summary>
+        <div class="work-description">
+          <p>{work.description}</p>
+          {work.url && <a class="quiet-link" href={work.url} target="_blank" rel="noopener noreferrer">{copy.link} ↗</a>}
+        </div>
+      </details>
+    )}</div> : <div class="empty-state"><p>{copy.worksEmpty}</p></div>}
+    <a class="quiet-link" href="/about/">{copy.aboutTitle}</a>
+  </section>
+</MainGridLayout>
+
