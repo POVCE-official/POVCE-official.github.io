@@ -11,20 +11,65 @@ import "../styles/works.css";
     {works.length ? <div class="works-grid">{works.map(work =>
       <details class="work-card">
         <summary class="work-face">
-          {work.cover && <img class="work-cover" src={work.cover} alt={work.title} loading="lazy" width="640" height="480"/>}
+          <div class="work-art">{work.cover && <img class="work-cover" src={work.cover} alt={work.title} loading="lazy" width="640" height="396"/>}</div>
           <div class="work-glass">
+            {work.cover && <img class="work-glass-backdrop" src={work.cover} alt="" aria-hidden="true" loading="lazy" width="640" height="396"/>}
             <h2>{work.title}</h2>
             <p>{work.description}</p>
             <span class="work-disclosure">作品介绍 <span aria-hidden="true">＋</span></span>
           </div>
         </summary>
-        <div class="work-description">
+        <div class="work-expansion"><div class="work-description">
           <p>{work.description}</p>
           {work.url && <a class="quiet-link" href={work.url} target="_blank" rel="noopener noreferrer">{copy.link} ↗</a>}
-        </div>
+        </div></div>
       </details>
     )}</div> : <div class="empty-state"><p>{copy.worksEmpty}</p></div>}
     <a class="quiet-link" href="/about/">{copy.aboutTitle}</a>
   </section>
 </MainGridLayout>
+
+<script>
+  const bound = new WeakSet<HTMLDetailsElement>();
+  function bindWorkCards() {
+    document.querySelectorAll<HTMLDetailsElement>(".work-card").forEach(card => {
+      if (bound.has(card)) return;
+      const summary = card.querySelector<HTMLElement>("summary");
+      const content = card.querySelector<HTMLElement>(".work-expansion");
+      if (!summary || !content) return;
+      bound.add(card);
+      let expanded = card.open;
+      let animation: Animation | null = null;
+      summary.addEventListener("click", event => {
+        event.preventDefault();
+        const height = card.open ? content.getBoundingClientRect().height : 0;
+        const opacity = card.open ? getComputedStyle(content).opacity : "0";
+        animation?.cancel();
+        expanded = !expanded;
+        card.classList.toggle("work-expanded", expanded);
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          card.open = expanded;
+          animation = null;
+          return;
+        }
+        // Keep native details open until the closing motion has finished.
+        card.open = true;
+        const motion = content.animate([
+          { height: `${height}px`, opacity },
+          { height: `${expanded ? content.scrollHeight : 0}px`, opacity: expanded ? 1 : 0 }
+        ], { duration: 500, easing: "cubic-bezier(.22,1,.36,1)", fill: "both" });
+        animation = motion;
+        motion.onfinish = () => {
+          if (animation !== motion) return;
+          card.open = expanded;
+          motion.cancel();
+          animation = null;
+        };
+      });
+    });
+  }
+  bindWorkCards();
+  document.addEventListener("swup:content:replace", bindWorkCards);
+  document.addEventListener("astro:page-load", bindWorkCards);
+</script>
 
