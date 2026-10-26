@@ -1,13 +1,11 @@
 
 /* Game, Movie and Series share one motion system. */
-.collection-grid[data-kind] .entry.archive-card{--card-motion-duration:480ms;--card-fade-duration:420ms;--card-image-duration:650ms;--card-motion-ease:cubic-bezier(.22,1,.36,1);--card-info-lift:22px;position:relative;isolation:isolate;display:block;aspect-ratio:2/3;min-height:0;padding:0;border:0;border-radius:var(--shape-corner-m);overflow:hidden;background:#181818;color:#fff}
+.collection-grid[data-kind] .entry.archive-card{--card-motion-duration:480ms;--card-fade-duration:420ms;--card-image-duration:650ms;--card-motion-ease:cubic-bezier(.22,1,.36,1);--card-info-lift:22px;position:relative;isolation:isolate;display:block;aspect-ratio:2/3;min-height:0;padding:0;border:0;border-radius:var(--shape-corner-m);overflow:hidden;clip-path:inset(0 round var(--shape-corner-m));background:#181818;color:#fff}
 .collection-grid[data-kind="games"] .entry.archive-card{aspect-ratio:4/5}
-.collection-grid .entry.archive-card .card-cover{position:absolute;inset:0;display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;margin:0;border-radius:0;transition:transform var(--card-image-duration) var(--card-motion-ease)}
-/* Cover fractional grid pixels throughout the zoom-out transition. */
-.collection-grid[data-kind="movies"] .entry.archive-card{clip-path:inset(0 round var(--shape-corner-m))}
-.collection-grid[data-kind="movies"] .entry.archive-card .card-cover{inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);max-width:none;max-height:none}
-.card-bottom-shade{position:absolute;inset:auto -1px -1px;height:44%;background:linear-gradient(transparent,rgba(0,0,0,.5) 36%,rgba(0,0,0,.9));transition:height var(--card-motion-duration) var(--card-motion-ease);pointer-events:none}
-.card-caption{position:absolute;left:.875rem;right:.875rem;bottom:.875rem;pointer-events:none}
+.collection-grid .entry.archive-card .card-cover{position:absolute;inset:-2px;display:block;width:calc(100% + 4px);height:calc(100% + 4px);max-width:none;max-height:none;aspect-ratio:auto;object-fit:cover;margin:0;border-radius:0;transition:transform var(--card-image-duration) var(--card-motion-ease)}
+/* One stationary, full-size mask avoids seams between independently moving panes. */
+.card-bottom-shade{position:absolute;inset:-2px;z-index:1;background:linear-gradient(transparent,rgba(0,0,0,.5) 36%,rgba(0,0,0,.9)) center bottom/100% 44% no-repeat;transition:background-size var(--card-motion-duration) var(--card-motion-ease);pointer-events:none}
+.card-caption{position:absolute;left:.875rem;right:.875rem;bottom:.875rem;z-index:4;pointer-events:none}
 .card-headline{transform:translateY(0);transition:transform var(--card-motion-duration) var(--card-motion-ease)}
 .card-meta{display:flex;align-items:baseline;min-width:0;font-size:.5625rem;line-height:1.5;color:rgba(255,255,255,.78);margin-bottom:.375rem;white-space:nowrap;overflow:hidden}
 .card-year{flex-shrink:0}
@@ -22,7 +20,7 @@
 .card-info-toggle:has(input:checked){background:rgba(0,0,0,.8)}
 .card-info-toggle:has(input:focus-visible){outline:2px solid #fff;outline-offset:2px}
 .archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-cover{transform:scale(1.035)}
-.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-bottom-shade{height:68%}
+.archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-bottom-shade{background-size:100% 68%}
 .archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-headline{transform:translateY(calc(-1 * var(--card-info-lift)))}
 .archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-creator{opacity:1}
 .archive-card:is(:hover,:focus-within,:has(.card-info-toggle input:checked)) .card-collected{opacity:1;transform:translateY(0)}

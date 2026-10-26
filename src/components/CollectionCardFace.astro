@@ -1,11 +1,11 @@
 ---
 import {Icon} from "astro-icon/components";
 import type {CollectionEntry} from "../data/collections";
-interface Props {item:CollectionEntry;eager?:boolean;}
-const {item,eager=false}=Astro.props;
+interface Props {item:CollectionEntry;eager?:boolean;shade?:boolean;}
+const {item,eager=false,shade=true}=Astro.props;
 ---
 {item.cover && <img class="card-cover" src={item.cover} alt="" loading={eager?"eager":"lazy"} decoding="async" width={item.kind==="games"?480:400} height="600"/>}
-<div class="card-bottom-shade"></div>
+{shade&&<div class="card-bottom-shade"></div>}
 <div class="card-caption">
  <div class="card-headline"><div class="card-meta">{item.year && <span class="card-year">{item.year}</span>}{item.creator && <span class="card-creator">{item.year?" · ":""}{item.creator}</span>}</div><h2 class="card-title" title={item.title}>{item.title}</h2></div>
  <time class="card-collected" datetime={item.date}>收录于 {item.date.replaceAll("-",".")}</time>
