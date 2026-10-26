@@ -1,9 +1,8 @@
 
  .season-card{--season-index:0;touch-action:pan-y;outline-offset:4px}
  .season-track{position:absolute;inset:0}
- .season-pane{position:absolute;inset:0;transform:translateX(calc((var(--pane-index) - var(--season-index)) * 100%));transition:transform 600ms cubic-bezier(.22,1,.36,1),visibility 0s}
- .season-pane[aria-hidden="true"]{visibility:hidden;transition:transform 600ms cubic-bezier(.22,1,.36,1),visibility 0s 600ms}
- .season-pane[aria-hidden="false"]{visibility:visible}
+ .season-pane{position:absolute;inset:0;transform:translate3d(calc((var(--pane-index) - var(--season-index)) * 100%),0,0);transition:transform 600ms cubic-bezier(.22,1,.36,1);will-change:transform;backface-visibility:hidden}
+ .season-card .card-cover{will-change:transform;backface-visibility:hidden}
  .season-top{position:absolute;inset:.6rem .6rem auto;z-index:5;display:flex;align-items:start;pointer-events:none}
  .season-switch{position:relative;box-sizing:border-box;width:2.8rem;height:1.85rem;overflow:hidden;border-radius:.925rem;background:#181818a6;backdrop-filter:blur(16px);transition:width 560ms cubic-bezier(.22,1,.36,1),background 360ms ease}
  .season-badge{position:absolute;top:0;left:0;width:2.8rem;height:1.85rem;display:grid;place-items:center;font-size:.75rem;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap;color:#fff;transition:opacity 180ms ease,transform 420ms cubic-bezier(.22,1,.36,1)}
