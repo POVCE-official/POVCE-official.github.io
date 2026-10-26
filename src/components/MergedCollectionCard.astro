@@ -5,12 +5,12 @@ import "../styles/collection-groups.css";
 interface Props {items:CollectionEntry[];}
 const {items}=Astro.props;
 const searchText=(item:CollectionEntry)=>[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase();
-const expandedWidth=.35+.125*(items.length-1)+items.reduce((sum,item,index)=>sum+(/^\d+$/.test(item.groupLabel||String(index+1))?1.5:2.2),0);
+const expandedWidth=.375+.1875*(items.length-1)+items.reduce((sum,item,index)=>sum+(/^\d+$/.test(item.groupLabel||String(index+1))?1.5:2.25),0);
 ---
 <article class="entry archive-card season-card" data-entry data-season-card data-status={items[0].status} data-search={items.map(searchText).join(" ")} style={`--group-expanded-width:${expandedWidth}rem`} tabindex="0" aria-label={items[0].title+" 合集，共"+items.length+"部；左右方向键切换"}>
  <div class="season-track">{items.map((item,index)=><div class="season-pane" data-pane data-search={searchText(item)} data-status={item.status??""} aria-hidden={index!==0} inert={index!==0} style={`--pane-index:${index}`}><CollectionCardFace item={item} eager/></div>)}</div>
  <noscript><ul class="group-fallback">{items.map(item=><li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a></li>)}</ul></noscript>
- <div class="season-top"><div class="season-switch"><span class="season-badge" data-season-badge aria-label={"当前第1项，共"+items.length+"项"}>1 / {items.length}</span><div class="season-tabs" role="group" aria-label="切换收藏">{items.map((item,index)=><button type="button" data-season={index} data-wide-label={!/^\d+$/.test(item.groupLabel||String(index+1))?"":undefined} aria-pressed={index===0} aria-label={"切换至 "+item.title} title={item.title}>{item.groupLabel||String(index+1)}</button>)}</div></div></div>
+ <div class="season-top"><div class="season-switch"><span class="season-badge" data-season-badge aria-label={"当前第1项，共"+items.length+"项"}>1 / {items.length}</span><div class="season-tabs" role="group" aria-label="切换收藏">{items.map((item,index)=><button type="button" data-season={index} data-wide-label={!/^\d+$/.test(item.groupLabel||String(index+1))?"":undefined} aria-pressed={index===0} aria-label={"切换至 "+item.title} title={item.title}><span class="season-tab-label">{item.groupLabel||String(index+1)}</span></button>)}</div></div></div>
  <div class="season-arrows"><button type="button" data-step="-1" aria-label="上一项"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><button type="button" data-step="1" aria-label="下一项"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div>
  <span class="season-announcement" aria-live="polite" data-season-live></span>
 </article>

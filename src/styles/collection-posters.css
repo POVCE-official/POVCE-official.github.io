@@ -6,7 +6,7 @@
 /* Cover fractional grid pixels throughout the zoom-out transition. */
 .collection-grid[data-kind="movies"] .entry.archive-card{clip-path:inset(0 round var(--shape-corner-m))}
 .collection-grid[data-kind="movies"] .entry.archive-card .card-cover{inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);max-width:none;max-height:none}
-.card-bottom-shade{position:absolute;inset:auto 0 0;height:44%;background:linear-gradient(transparent,rgba(0,0,0,.5) 36%,rgba(0,0,0,.9));transition:height var(--card-motion-duration) var(--card-motion-ease);pointer-events:none}
+.card-bottom-shade{position:absolute;inset:auto -1px -1px;height:44%;background:linear-gradient(transparent,rgba(0,0,0,.5) 36%,rgba(0,0,0,.9));transition:height var(--card-motion-duration) var(--card-motion-ease);pointer-events:none}
 .card-caption{position:absolute;left:.875rem;right:.875rem;bottom:.875rem;pointer-events:none}
 .card-headline{transform:translateY(0);transition:transform var(--card-motion-duration) var(--card-motion-ease)}
 .card-meta{display:flex;align-items:baseline;min-width:0;font-size:.5625rem;line-height:1.5;color:rgba(255,255,255,.78);margin-bottom:.375rem;white-space:nowrap;overflow:hidden}
