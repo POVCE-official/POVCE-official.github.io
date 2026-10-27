@@ -110,14 +110,17 @@ body:has(#swup-container[data-current-page="about"]) .banner-stage__copy--contex
 .shelf-card .shelf-card-body h2{color:#fff}
 .shelf-card .shelf-card-body p{color:rgba(255,255,255,.78)}
 .shelf-card .shelf-card-body :is(small,footer){color:rgba(255,255,255,.68)}
-body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link{transition:transform var(--archive-lift-duration) var(--archive-lift-ease),box-shadow var(--archive-lift-duration) var(--archive-lift-ease)}
+body .m3-profile .m3-profile__avatar-link{transition:transform var(--archive-lift-duration) var(--archive-lift-ease),box-shadow var(--archive-lift-duration) var(--archive-lift-ease)}
 @media(hover:hover) and (pointer:fine){
  :is(.collection-lift,.artist-card,.interactive-row,.photo-wall>a,.shelf-grid .shelf-card):hover{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
- body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link:hover{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+ body .m3-profile .m3-profile__avatar-link:hover{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
 }
 :is(.collection-lift,.artist-card,.interactive-row):has(:focus-visible),.collection-lift:has(.archive-card:focus-visible),:is(.photo-wall>a,.shelf-card):focus-visible{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
-body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link:focus-visible{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+body .m3-profile .m3-profile__avatar-link:focus-visible{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+.song-list[data-list-kind="songs"] .interactive-row{--archive-lift:0px;--archive-lift-shadow:none;border-radius:0;transition:background-color 240ms ease}
+.song-list[data-list-kind="songs"] .interactive-row:is(:hover,:focus-within){background:color-mix(in oklab,var(--on-surface) 3%,transparent)}
+.song-list[data-list-kind="songs"] .interactive-row:is(:hover,:focus-within) .cover-window img{transform:none}
 @media(prefers-reduced-motion:reduce){
- :is(.collection-lift,.artist-card,.interactive-row,.photo-wall>a,.shelf-grid .shelf-card),body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link{transition:none!important;transform:none!important}
+ :is(.collection-lift,.artist-card,.interactive-row,.photo-wall>a,.shelf-grid .shelf-card),body .m3-profile .m3-profile__avatar-link{transition:none!important;transform:none!important}
 }
 

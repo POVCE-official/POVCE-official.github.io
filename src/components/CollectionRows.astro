@@ -5,7 +5,7 @@ import type {CollectionEntry} from "../data/collections";
 interface Props {items:CollectionEntry[];recent?:boolean;}
 const {items,recent=false}=Astro.props;
 ---
-<div class="song-list">{items.map(item=>{
+<div class="song-list" data-list-kind={recent?"recent":"songs"}>{items.map(item=>{
  const href=item.url||(recent?sectionConfig[item.kind].href:undefined);
  const external=href?.startsWith('http');
  return <article class="song-row interactive-row" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(' ').toLowerCase()}>
@@ -14,3 +14,4 @@ const {items,recent=false}=Astro.props;
   <time datetime={item.date}>{item.date.replaceAll('-','.')}</time>
  </article>;
 })}</div>
+
