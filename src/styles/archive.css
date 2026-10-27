@@ -94,3 +94,30 @@ body:has(#swup-container[data-current-page="about"]) .banner-stage__copy--contex
 .banner-stage__copy--home p:empty::after{visibility:hidden!important}
 
 @media(prefers-reduced-motion:reduce){.shelf-card .shelf-art img,.photo-wall img{transition:none}.shelf-card:is(:hover,:focus-visible) .shelf-art img,.photo-wall a:is(:hover,:focus-visible) img{transform:none}}
+
+/* Shared lift lives outside the poster clip so shadows never expose slide edges. */
+:root{--archive-lift:-3px;--archive-lift-shadow:0 10px 24px rgba(0,0,0,.16);--archive-lift-duration:650ms;--archive-lift-ease:cubic-bezier(.22,1,.36,1)}
+.collection-lift{min-width:0;border-radius:var(--shape-corner-m)}
+.collection-grid[data-kind="games"]{gap:1rem}
+@media(max-width:600px){.collection-grid[data-kind="games"]{gap:.75rem}}
+.collection-lift:has(>[hidden]){display:none}
+:is(.collection-lift,.artist-card,.interactive-row,.photo-wall>a,.shelf-card){transition:transform var(--archive-lift-duration) var(--archive-lift-ease),box-shadow var(--archive-lift-duration) var(--archive-lift-ease),background-color var(--archive-lift-duration) var(--archive-lift-ease)}
+.interactive-row{--archive-lift:-2px;--archive-lift-shadow:0 6px 16px rgba(0,0,0,.12);border-radius:var(--shape-corner-s)}
+.photo-wall>a{--archive-lift:-2px}
+.shelf-grid .shelf-card{border:0;background:var(--surface-container-low)}
+.shelf-card .shelf-card-body{position:relative;isolation:isolate;overflow:hidden;padding:1rem;gap:.45rem;background:rgba(20,20,20,.62);color:#fff;-webkit-backdrop-filter:blur(24px) saturate(.85);backdrop-filter:blur(24px) saturate(.85)}
+.shelf-glass-backdrop{position:absolute;inset:-24px;z-index:-1;max-width:none;width:calc(100% + 48px);height:calc(100% + 48px);object-fit:cover;object-position:center bottom;filter:blur(24px) brightness(.4) saturate(.85);pointer-events:none}
+.shelf-card .shelf-card-body h2{color:#fff}
+.shelf-card .shelf-card-body p{color:rgba(255,255,255,.78)}
+.shelf-card .shelf-card-body :is(small,footer){color:rgba(255,255,255,.68)}
+body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link{transition:transform var(--archive-lift-duration) var(--archive-lift-ease),box-shadow var(--archive-lift-duration) var(--archive-lift-ease)}
+@media(hover:hover) and (pointer:fine){
+ :is(.collection-lift,.artist-card,.interactive-row,.photo-wall>a,.shelf-grid .shelf-card):hover{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+ body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link:hover{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+}
+:is(.collection-lift,.artist-card,.interactive-row):has(:focus-visible),.collection-lift:has(.archive-card:focus-visible),:is(.photo-wall>a,.shelf-card):focus-visible{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link:focus-visible{transform:translateY(var(--archive-lift));box-shadow:var(--archive-lift-shadow)}
+@media(prefers-reduced-motion:reduce){
+ :is(.collection-lift,.artist-card,.interactive-row,.photo-wall>a,.shelf-grid .shelf-card),body:has(#swup-container[data-current-page="home"]) .m3-profile__avatar-link{transition:none!important;transform:none!important}
+}
+

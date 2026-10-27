@@ -10,5 +10,6 @@ const groups=groupEntries(items) as CollectionEntry[][];
 ---
 <div class="collection-grid" data-kind={items[0]?.kind}>{groups.map(members=>{
  const item=members[0];
- return members.length>1?<MergedCollectionCard items={members}/>:<article class="entry archive-card" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase()} tabindex={item.url?undefined:0}><CollectionCardFace item={item}/></article>;
+ return <div class="collection-lift">{members.length>1?<MergedCollectionCard items={members}/>:<article class="entry archive-card" data-entry data-status={item.status} data-search={[item.title,item.creator,item.note,...(item.tags??[])].filter(Boolean).join(" ").toLowerCase()} tabindex={item.url?undefined:0}><CollectionCardFace item={item}/></article>}</div>;
 })}</div>
+
