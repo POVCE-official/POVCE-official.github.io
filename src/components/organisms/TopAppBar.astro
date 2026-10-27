@@ -63,6 +63,23 @@ function isActive(link: (typeof links)[number]): boolean {
 	</div>
 </div>
 
+<script is:inline>
+  // Match the banner's initial state before deferred theme scripts can paint
+  // the default solid bar. The regular scroll handler takes over afterward.
+  (() => {
+    const body = document.body;
+    const desktop = window.matchMedia('(min-width: 1024px)').matches;
+    const hasBanner = desktop
+      ? body.dataset.bannerHasDesktop === 'true'
+      : body.dataset.currentPage === 'home' && body.dataset.bannerHasMobile === 'true';
+    const visible = document.documentElement.dataset.wallpaperMode === 'banner' && hasBanner;
+    body.dataset.bannerVisible = String(visible);
+    body.dataset.bannerLayout = visible ? 'banner' : 'compact';
+    body.dataset.bannerTopAppBar = String(visible);
+    document.getElementById('navbar')?.classList.toggle('top-app-bar--transparent', visible && window.scrollY === 0);
+  })();
+</script>
+
 <script>
 	import { resolvePageKey } from "@utils/nav-utils";
 
@@ -330,3 +347,4 @@ document.addEventListener('swup:content:replace', bindSearchTriggers);
 		display: none;
 	}
 </style>
+
