@@ -7,5 +7,8 @@
   "cover": "/uploads/games/persona-5-strikers-portrait.webp",
   "url": "https://store.steampowered.com/app/1382330/",
   "draft": false,
-  "status": "已通关"
+  "status": "已通关",
+  "groupId": "persona",
+  "groupLabel": "3",
+  "groupOrder": 3
 }

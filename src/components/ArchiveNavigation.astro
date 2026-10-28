@@ -1,8 +1,8 @@
 ---
 import {resolvePageKey} from "@utils/nav-utils";
-const items=[{name:"Home",href:"/",key:"home"},{name:"Music",href:"/music/",key:"music"},{name:"Media",href:"/media/",key:"media"},{name:"Game",href:"/games/",key:"games"},{name:"About",href:"/about/",key:"about"}];
-const key=resolvePageKey(Astro.url);
-const label=items.find(item=>item.key===key)?.name ?? (Astro.url.pathname.startsWith("/works")?"设计作品":"导航");
+const items=[{name:"Home",href:"/",key:"home"},{name:"Music",href:"/music/",key:"music"},{name:"Media",href:"/media/",key:"media"},{name:"Game",href:"/games/",key:"games"},{name:"Work",href:"/works/",key:"work"},{name:"About",href:"/about/",key:"about"}];
+const key=Astro.url.pathname.replace(/\/+$/,"")==="/works"?"work":resolvePageKey(Astro.url);
+const label=items.find(item=>item.key===key)?.name ?? "导航";
 ---
 <details class="archive-navigation">
  <summary aria-label={`${label}，展开导航`}><span data-navigation-label>{label}</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
@@ -42,10 +42,11 @@ const label=items.find(item=>item.key===key)?.name ?? (Astro.url.pathname.starts
   document.addEventListener("keydown",event=>{if(event.key==="Escape"&&menu.open){close();summary.focus()}});
   panel.addEventListener("click",event=>{if((event.target as Element).closest("a"))close()});
   const sync=()=>{
-   close();const key=resolvePageKey(new URL(location.href));let label=location.pathname.startsWith("/works")?"设计作品":"导航";
+   close();const key=location.pathname.replace(/\/+$/,"")==="/works"?"work":resolvePageKey(new URL(location.href));let label="导航";
    panel.querySelectorAll<HTMLAnchorElement>("a[data-section-key]").forEach(link=>{const active=link.dataset.sectionKey===key;if(active){link.setAttribute("aria-current","page");label=link.firstChild?.textContent??label}else link.removeAttribute("aria-current");link.querySelector("span")!.textContent=active?"•":"↗"});
    menu.querySelector("[data-navigation-label]")!.textContent=label;summary.setAttribute("aria-label",`${label}，展开导航`);
   };
   document.addEventListener("swup:content:replace",sync);window.addEventListener("popstate",sync);
  }
 </script>
+

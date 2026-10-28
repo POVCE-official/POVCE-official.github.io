@@ -1,10 +1,10 @@
 ---
-import MainGridLayout from "@layouts/MainGridLayout.astro";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
 import {copy,works} from "../data/collections";
 import "../styles/archive.css";
 import "../styles/works.css";
 ---
-<MainGridLayout title={copy.works} description={copy.worksText} page="projects">
+<MainGridLayout title={copy.works} bannerTitle="Part.2" description={copy.worksText} page="projects">
   <section class="archive-panel">
     <h1>{copy.works}</h1>
     <p class="archive-prose">{copy.worksText}</p>
