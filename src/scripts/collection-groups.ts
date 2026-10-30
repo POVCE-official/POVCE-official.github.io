@@ -40,3 +40,7 @@ function initMergedCards(){
 initMergedCards();
 document.addEventListener('astro:page-load',initMergedCards);
 document.addEventListener('swup:contentReplaced',initMergedCards);
+
+document.addEventListener('swup:content:replace',initMergedCards);
+const setupGroupNavigation=()=>{window.swup?.hooks.on('page:view',initMergedCards);};
+if(window.swup)setupGroupNavigation();else document.addEventListener('swup:enable',setupGroupNavigation,{once:true});

@@ -1,6 +1,6 @@
 ---
-import CollectionView from "../components/CollectionView.astro";
-export function getStaticPaths(){return [{params:{shelf:"games"}},{params:{shelf:"movies"}}];}
-if(Astro.params.shelf==="movies") return Astro.redirect("/media/",301);
+import MaterialArchive from '../layouts/MaterialArchive.astro';
+export function getStaticPaths(){return [{params:{shelf:'games'}},{params:{shelf:'movies'}}];}
+if(Astro.params.shelf==='movies') return Astro.redirect('/media/',301);
 ---
-<CollectionView kind="games"/>
+<MaterialArchive view="game"/>
