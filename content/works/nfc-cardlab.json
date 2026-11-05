@@ -1,0 +1,10 @@
+{
+  "id": "nfc-cardlab",
+  "title": "NFC CardLab",
+  "description": "An Android NFC reader, writer and card manager. Read card content, write text and website links, create app and system-settings shortcuts, clear compatible tags and save card snapshots locally. Advanced tools support known-key MIFARE Classic operations, APDU scripts and known-key data decryption. Requires Android 8.0 or later; compatibility depends on the phone and card.",
+  "descriptionZh": "安卓 NFC 读写与卡片管理工具。支持读取卡片内容、写入文字和网址、创建 App 与系统设置快捷任务、清空兼容标签内容，以及在本地保存卡片快照。高级工具提供已知密钥的 MIFARE Classic 操作、APDU 脚本和已知密钥数据解密。需要 Android 8.0 及以上版本，兼容能力取决于手机和卡片。",
+  "date": "2026-11-06",
+  "cover": "/uploads/nfc-cardlab.svg",
+  "url": "https://github.com/POVCE-official/NFC-CardLab",
+  "draft": false
+}
