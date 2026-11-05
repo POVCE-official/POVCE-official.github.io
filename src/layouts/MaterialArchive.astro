@@ -44,7 +44,7 @@ const description=view==='home'?settings.homeDescription:view==='about'?settings
 
   </aside>
   <main id="main-content">
-   <header class="md-page-heading"><div><p class="md-overline">{view==='home'?'PERSONAL ARCHIVE':view==='work'?'SELECTED WORK':view==='about'?'PROFILE':'COLLECTION'}</p><h2>{titles[view]}</h2></div>{kind&&<span class="md-count">{items.length} 条收藏</span>}</header>
+   <header class="md-page-heading"><div><p class="md-overline">{view==='home'?'PERSONAL ARCHIVE':view==='work'?'SELECTED WORK':view==='about'?'PROFILE':'COLLECTION'}</p><h2>{titles[view]}</h2></div>{kind&&<span class="md-count">{items.length} {view==='artists'?'artists':'条收藏'}</span>}</header>
    {view==='home' ? <>
     <p class="md-intro">{settings.homeDescription}</p>
     <div class="md-shelves">{shelves.map(shelf=>{const entries=collections.filter(item=>shelf.kinds.includes(item.kind));const cover=entries.find(item=>item.cover)?.cover;const target={music:'songs',movies:'movie',games:'game'}[shelf.kind];return <a class="md-shelf" href={href(target)}><div class="md-shelf-top"><span class="md-shelf-icon"><Icon name={shelf.icon}/></span><Icon name="material-symbols:arrow-outward-rounded"/></div><div class="md-shelf-covers">{entries.filter(item=>item.cover).slice(0,3).map(item=><img src={item.cover} alt="" width="100" height="140" loading="lazy"/>)}</div><div class="md-shelf-bottom" style={cover?`--shelf-cover:url("${cover}")`:undefined}><h3>{shelf.title}</h3><p>{shelf.kind==='games'?'Games':shelf.description}</p><span>{entries.length} 条收藏</span></div></a>})}</div>
@@ -53,10 +53,10 @@ const description=view==='home'?settings.homeDescription:view==='about'?settings
     {(view==='songs'||view==='artists')&&<nav class="md-tabs" aria-label="Music 分类"><a href={href('songs')} aria-current={view==='songs'?'page':undefined}>Songs</a><a href={href('artists')} aria-current={view==='artists'?'page':undefined}>Artists</a></nav>}
     {(view==='movie'||view==='series')&&<nav class="md-tabs" aria-label="Media 分类"><a href={href('movie')} aria-current={view==='movie'?'page':undefined}>Movie</a><a href={href('series')} aria-current={view==='series'?'page':undefined}>Series</a></nav>}
     <p class="md-description">{sectionConfig[kind].description}</p>
-    <div class="md-toolbar"><label class="md-search"><Icon name="material-symbols:search-rounded"/><input id="collection-search" type="search" placeholder="搜索收藏" aria-label="搜索当前收藏"/></label>{view==='game'&&<div class="md-chips" role="group" aria-label="游玩状态">{['All','已通关','未通关'].map((status,index)=><button type="button" data-filter={index?status:''} aria-pressed={index===0}>{index===0?'全部':status}</button>)}</div>}<span class="md-sort">新到旧<Icon name="material-symbols:arrow-downward-rounded"/></span></div>
-    <section class="md-collection" aria-label={view+' 收藏'}>{view==='songs'?<CollectionRows items={items}/>:view==='artists'?<ArtistCards items={items}/>:<CollectionCards items={items}/>}<p id="filter-empty" hidden>没有找到匹配的收藏。</p></section>
-   </> : view==='work'?<><p class="md-description">我是废物。</p><div class="md-works">{works.map(work=><details class="md-work"><summary>{work.cover&&<img src={work.cover} alt={work.title} width="640" height="396"/>}<div><h3>{work.title}</h3><span>作品介绍<Icon name="material-symbols:expand-more-rounded"/></span></div></summary><div class="md-work-details"><p>{work.description}</p>{work.url&&<a class="md-tonal-button" href={work.url} target="_blank" rel="noopener noreferrer">查看作品 ↗</a>}</div></details>)}</div></>:<section class="md-about"><h3>{settings.name}</h3><p class="md-about-text">{settings.aboutText}</p><p class="md-muted">{settings.aboutMore}</p><footer><div><a href={href('work')}>Work</a><a href={settings.githubUrl} target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><a class="md-contact" href="https://x.com/povcemt" target="_blank" rel="noopener noreferrer"><span><Icon name="fa6-brands:x-twitter"/></span>联系我</a></footer></section>}
-   <footer class="md-footer"><span>© POVCE</span><a href={href('work')}>Work</a><a href="/admin/">管理</a></footer>
+    <div class="md-toolbar"><label class="md-search"><Icon name="material-symbols:search-rounded"/><input id="collection-search" type="search" placeholder={view==='artists'?'Search artists':'搜索收藏'} aria-label={view==='artists'?'Search artists':'搜索当前收藏'}/></label>{view==='game'&&<div class="md-chips" role="group" aria-label="游玩状态">{['All','已通关','未通关'].map((status,index)=><button type="button" data-filter={index?status:''} aria-pressed={index===0}>{index===0?'全部':status}</button>)}</div>}<span class="md-sort">{view==='artists'?'Newest first':'新到旧'}<Icon name="material-symbols:arrow-downward-rounded"/></span></div>
+    <section class="md-collection" aria-label={view+' 收藏'}>{view==='songs'?<CollectionRows items={items}/>:view==='artists'?<ArtistCards items={items}/>:<CollectionCards items={items}/>}<p id="filter-empty" hidden>{view==='artists'?'No matching artists found.':'没有找到匹配的收藏。'}</p></section>
+   </> : view==='work'?<><p class="md-description" lang="en">I’m useless.<span class="md-work-chinese" lang="zh-CN">我是废物。</span></p><div class="md-works">{works.map(work=><details class="md-work"><summary>{work.cover&&<img src={work.cover} alt={work.title} width="640" height="396"/>}<div><h3>{work.title}</h3><span>About this project<Icon name="material-symbols:expand-more-rounded"/></span></div></summary><div class="md-work-details"><p lang="en">{work.description}</p>{work.descriptionZh&&<p class="md-work-chinese" lang="zh-CN">{work.descriptionZh}</p>}{work.url&&<a class="md-tonal-button" href={work.url} target="_blank" rel="noopener noreferrer">View project ↗</a>}</div></details>)}</div></>:<section class="md-about"><h3>{settings.name}</h3><p class="md-about-text">{settings.aboutText}</p><p class="md-muted">{settings.aboutMore}</p><footer><div><a href={href('work')}>Work</a><a href={settings.githubUrl} target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><a class="md-contact" href="https://x.com/povcemt" target="_blank" rel="noopener noreferrer"><span><Icon name="fa6-brands:x-twitter"/></span>联系我</a></footer></section>}
+   <footer class="md-footer"><span>© POVCE</span><a href={href('work')}>Work</a><a href="/admin/">Admin</a></footer>
   </main>
  </div>
  <dialog class="md-search-dialog" aria-labelledby="search-title"><div class="md-dialog-heading"><h2 id="search-title">搜索收藏</h2><button class="md-icon-button" id="search-close" aria-label="关闭搜索"><Icon name="material-symbols:close-rounded"/></button></div><label class="md-search"><Icon name="material-symbols:search-rounded"/><input id="global-search" type="search" placeholder="标题、创作者" aria-label="搜索所有收藏"/></label><div class="md-search-results">{collections.map(item=><a href={item.url||href({music:'songs',artists:'artists',movies:'movie',series:'series',games:'game'}[item.kind])} data-result data-query={(item.title+' '+(item.creator||'')).toLowerCase()} target={item.url?'_blank':undefined} rel={item.url?'noopener noreferrer':undefined}><span>{item.title}<small>{item.creator}</small></span><Icon name="material-symbols:arrow-outward-rounded"/></a>)}</div><p id="global-empty" hidden>没有找到匹配的收藏。</p></dialog>
@@ -66,20 +66,46 @@ const description=view==='home'?settings.homeDescription:view==='about'?settings
   const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('motion-reduced');
   const searchDialog=document.querySelector<HTMLDialogElement>('.md-search-dialog');if(!searchDialog||searchDialog.dataset.materialReady)return;searchDialog.dataset.materialReady='true';
   document.querySelector('#display-settings-switch')?.addEventListener('click',()=>document.querySelector('#display-setting')?.classList.toggle('float-panel-closed'));
-  document.querySelector('#search-open')?.addEventListener('click',()=>searchDialog.showModal());
-  document.querySelector('#search-close')?.addEventListener('click',()=>searchDialog.close());
-  searchDialog.addEventListener('click',event=>{if(event.target===searchDialog){const rect=searchDialog.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)searchDialog.close();}});
+  const panelMotion=new Map<HTMLElement,Animation>();
+  function animatePanel(panel:HTMLElement,opening:boolean,finish?:()=>void){
+   const previous=panelMotion.get(panel);
+   const current=previous?{opacity:getComputedStyle(panel).opacity,transform:getComputedStyle(panel).transform}:null;
+   previous?.cancel();
+   if(reduced()){finish?.();return;}
+   const hidden={opacity:0,transform:'translateY(-8px) scale(.97)'};
+   const shown={opacity:1,transform:'translateY(0) scale(1)'};
+   const motion=panel.animate([current||(opening?hidden:shown),opening?shown:hidden],{duration:opening?420:240,easing:'cubic-bezier(.2,0,0,1)',fill:'both'});
+   panelMotion.set(panel,motion);
+   motion.onfinish=()=>{if(panelMotion.get(panel)!==motion)return;finish?.();motion.cancel();panelMotion.delete(panel);};
+  }
+  let searchClosing=false;
+  const closeSearch=()=>{if(!searchDialog.open||searchClosing)return;searchClosing=true;animatePanel(searchDialog,false,()=>{searchDialog.close();searchClosing=false;});};
+  document.querySelector('#search-open')?.addEventListener('click',()=>{if(searchDialog.open&&!searchClosing)return;searchClosing=false;searchDialog.showModal();animatePanel(searchDialog,true);});
+  document.querySelector('#search-close')?.addEventListener('click',closeSearch);
+  searchDialog.addEventListener('cancel',event=>{event.preventDefault();closeSearch();});
+  searchDialog.addEventListener('click',event=>{if(event.target===searchDialog){const rect=searchDialog.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)closeSearch();}});
   document.querySelector<HTMLInputElement>('#global-search')?.addEventListener('input',event=>{const q=(event.target as HTMLInputElement).value.trim().toLowerCase();let matches=0;document.querySelectorAll<HTMLElement>('[data-result]').forEach(row=>{row.hidden=!row.dataset.query?.includes(q);if(!row.hidden)matches++;});document.querySelector<HTMLElement>('#global-empty')!.hidden=matches>0;});
   let status='';
   function filter(){const query=document.querySelector<HTMLInputElement>('#collection-search')?.value.trim().toLowerCase()||'';let visible=0;document.querySelectorAll<HTMLElement>('.md-collection [data-entry]').forEach(entry=>{const panes=Array.from(entry.querySelectorAll<HTMLElement>('[data-pane]'));if(panes.length){const available=panes.flatMap((pane,index)=>((!status||pane.dataset.status===status)&&pane.dataset.search?.includes(query))?[index]:[]);entry.hidden=!available.length;entry.dispatchEvent(new CustomEvent('collection:filter',{detail:available}));}else entry.hidden=!entry.dataset.search?.includes(query)||(!!status&&entry.dataset.status!==status);if(!entry.hidden)visible++;});const empty=document.querySelector<HTMLElement>('#filter-empty');if(empty)empty.hidden=visible>0;}
   document.querySelector('#collection-search')?.addEventListener('input',filter);
   document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach(button=>button.addEventListener('click',()=>{status=button.dataset.filter||'';document.querySelectorAll('[data-filter]').forEach(chip=>chip.setAttribute('aria-pressed',String(chip===button)));filter();}));
   const menu=document.querySelector<HTMLDetailsElement>('.md-menu')!;
+  const menuPanel=menu.querySelector<HTMLElement>('nav')!;
+  let menuExpanded=menu.open;
   let closeTimer:ReturnType<typeof setTimeout>;
-  menu.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'){clearTimeout(closeTimer);menu.open=true;}});
-  menu.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse')closeTimer=setTimeout(()=>{if(!menu.matches(':focus-within'))menu.open=false;},200);});
-  document.addEventListener('keydown',event=>{if(event.key==='Escape')menu.open=false;});
-  document.addEventListener('click',event=>{if(!menu.contains(event.target as Node))menu.open=false;});
+  function setMenu(opening:boolean){
+   clearTimeout(closeTimer);
+   if(menuExpanded===opening)return;
+   menuExpanded=opening;
+   if(opening){menu.open=true;animatePanel(menuPanel,true);}
+   else animatePanel(menuPanel,false,()=>{menu.open=false;});
+  }
+  menu.querySelector('summary')?.addEventListener('click',event=>{event.preventDefault();setMenu(!menuExpanded);});
+  menu.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'){clearTimeout(closeTimer);setMenu(true);}});
+  menu.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse')closeTimer=setTimeout(()=>{if(!menu.matches(':focus-within'))setMenu(false);},160);});
+  menu.addEventListener('focusout',()=>{setTimeout(()=>{if(!menu.isConnected)return;if(!menu.matches(':focus-within')&&!menu.matches(':hover'))setMenu(false);},0);});
+  document.addEventListener('keydown',event=>{if(menu.isConnected&&event.key==='Escape')setMenu(false);});
+  document.addEventListener('click',event=>{if(menu.isConnected&&!menu.contains(event.target as Node))setMenu(false);});
   document.querySelectorAll<HTMLElement>('button,.md-shelf,.md-side-nav a,.md-tonal-button').forEach(control=>control.addEventListener('pointerdown',event=>{if(reduced())return;const rect=control.getBoundingClientRect();const ripple=document.createElement('span');ripple.className='md-ripple';ripple.style.left=`${event.clientX-rect.left}px`;ripple.style.top=`${event.clientY-rect.top}px`;control.append(ripple);ripple.addEventListener('animationend',()=>ripple.remove());}));
   document.querySelectorAll<HTMLDetailsElement>('.md-work,.gallery-more').forEach(details=>{
    const summary=details.querySelector('summary');let expanded=details.open;let animation:Animation|null=null;

@@ -645,7 +645,12 @@
         },
         {
           "name": "description",
-          "label": "作品简介",
+          "label": "英文简介",
+          "type": "text"
+        },
+        {
+          "name": "descriptionZh",
+          "label": "中文简介（显示在英文下方）",
           "type": "text"
         },
         {

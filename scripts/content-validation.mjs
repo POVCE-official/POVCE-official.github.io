@@ -36,7 +36,7 @@ export function validateEntry(value, kind, source) {
   text(value.date, `${source}.date`, true);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value.date) || !Number.isFinite(Date.parse(value.date)) || new Date(value.date).toISOString().slice(0, 10) !== value.date) fail(source, '收录日期须为有效的 YYYY-MM-DD 日期');
   if (value.draft !== undefined && typeof value.draft !== 'boolean') fail(source, '暂不展示必须是开关值');
-  for (const key of ['creator', 'year', 'note', 'description']) text(value[key], `${source}.${key}`);
+  for (const key of ['creator', 'year', 'note', 'description', 'descriptionZh']) text(value[key], `${source}.${key}`);
   if (['movies','series','games'].includes(kind)) {
     text(value.groupId, `${source}.groupId`);
     text(value.groupLabel, `${source}.groupLabel`);
