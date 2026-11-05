@@ -23,7 +23,7 @@ export const shelves = [
  {kind:"games", title:"Game", english:"PLAY ROOM", href:"/games/", icon:"material-symbols:sports-esports-outline-rounded", description:"走过的世界，和未完的冒险。", kinds:["games"]},
 ];
 export const sectionConfig = {
- music:{title:"Music",sub:"Songs",description:"一首歌、一张专辑，和反复按下播放的瞬间。",href:"/music/",page:"albums" as const,statuses:["常听","在听","想听"],empty:"还没有收录歌曲",icon:"material-symbols:headphones-rounded"},
+ music:{title:"Music",sub:"Songs",description:"Songs, albums, and moments worth playing again.",href:"/music/",page:"albums" as const,statuses:["常听","在听","想听"],empty:"还没有收录歌曲",icon:"material-symbols:headphones-rounded"},
  artists:{title:"Music",sub:"Artists",description:"Favorite artists, bands, and moments worth keeping.",href:"/music/artists/",page:"albums" as const,statuses:["Solo","Band"],empty:"No artists collected yet",icon:"material-symbols:person-outline-rounded"},
  movies:{title:"Media",sub:"Movie",description:"The dead go to the movie theater",href:"/media/",page:"anime" as const,statuses:[],empty:"还没有收录电影",icon:"material-symbols:movie-outline-rounded"},
  series:{title:"Media",sub:"Series",description:"剧集与番剧",href:"/media/series/",page:"anime" as const,statuses:[],empty:"还没有收录剧集或番剧",icon:"material-symbols:live-tv-rounded"},
