@@ -25,3 +25,5 @@
 @media(max-width:720px){.material-preview .md-search-dialog{inset:76px 16px auto;max-height:calc(100dvh - 96px);padding:20px}}
 
 .md-work-chinese{display:block;margin-top:12px;opacity:.8}.md-work-details .md-work-chinese{border-top:1px solid var(--outline-variant);padding-top:16px}
+.md-work-details{max-height:min(360px,45dvh);overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:var(--outline-variant) transparent;scrollbar-gutter:stable}
+.md-work-details:focus-visible{outline-offset:-4px}
